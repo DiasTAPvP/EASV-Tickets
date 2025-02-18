@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.easvtickets.AdminScreen"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.AdminScreen">
+   <children>
+      <TableView layoutX="37.0" layoutY="36.0" prefHeight="344.0" prefWidth="200.0">
+         <columns>
+            <TableColumn prefWidth="199.0" text="People" />
+         </columns>
+      </TableView>
+      <TableView layoutX="247.0" layoutY="36.0" prefHeight="344.0" prefWidth="200.0">
+         <columns>
+            <TableColumn prefWidth="199.0" text="Events" />
+         </columns>
+      </TableView>
+      <BorderPane layoutX="459.0" layoutY="61.0" prefHeight="288.0" prefWidth="200.0" />
+      <Button layoutX="514.0" layoutY="355.0" mnemonicParsing="false" text="Manage Entity" />
+      <Label layoutX="469.0" layoutY="36.0" text="Currently Selected Info">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
