@@ -7,7 +7,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="168.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.LoginForm">
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="button-login" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
    <children>
       <Text layoutX="134.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
@@ -27,10 +28,11 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="224.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Login">
+      <Button fx:id="coordLogin" layoutX="224.0" layoutY="127.0" mnemonicParsing="false" onAction="#onCoordLoginPressed" prefHeight="25.0" prefWidth="79.0" styleClass="button-login" stylesheets="@style.css" text="Login">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
+      <Button fx:id="adminLogin" layoutX="319.0" layoutY="128.0" mnemonicParsing="false" onAction="#onAdminLoginPressed" text="AdminTest" />
    </children>
 </AnchorPane>

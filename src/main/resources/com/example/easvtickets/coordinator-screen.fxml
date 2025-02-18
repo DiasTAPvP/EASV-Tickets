@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.CoordinatorScreen">
+<AnchorPane prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
-      <TableView layoutX="27.0" layoutY="26.0" prefHeight="344.0" prefWidth="200.0">
+      <TableView layoutX="27.0" layoutY="26.0" prefHeight="344.0" prefWidth="200.0" styleClass="table" stylesheets="@style.css">
         <columns>
           <TableColumn prefWidth="199.0" text="My Events" />
         </columns>
