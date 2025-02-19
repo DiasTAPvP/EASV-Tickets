@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
       <TableView layoutX="27.0" layoutY="26.0" prefHeight="344.0" prefWidth="200.0" styleClass="table" stylesheets="@style.css">
         <columns>
@@ -29,7 +28,7 @@
          </font>
       </Label>
       <Button layoutX="458.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Create Event" />
-      <Button layoutX="570.0" layoutY="318.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="92.0" text="Tickets">
+      <Button fx:id="ticketsButton" layoutX="570.0" layoutY="318.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="52.0" prefWidth="92.0" text="Tickets">
          <font>
             <Font size="18.0" />
          </font>

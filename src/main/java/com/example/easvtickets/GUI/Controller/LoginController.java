@@ -23,13 +23,15 @@ public class LoginController implements Initializable {
     @FXML
     private void onCoordLoginPressed() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/coordinator-screen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-screen.fxml"));
         Parent root = loader.load();
 
         //Get the controller and set the controller
         CoordScreenController coordcontroller = loader.getController();
         coordcontroller.setLoginController(this);
 
+        Stage loginStage = (Stage) coordLogin.getScene().getWindow();
+        loginStage.close();
 
         Stage stage = new Stage();
         stage.setTitle("Welcome Coordinator");
@@ -48,6 +50,8 @@ public class LoginController implements Initializable {
         AdminScreenController admincontroller = loader.getController();
         admincontroller.setLoginController(this);
 
+        Stage loginStage = (Stage) adminLogin.getScene().getWindow();
+        loginStage.close();
 
         Stage stage = new Stage();
         stage.setTitle("Welcome Admin");
@@ -61,4 +65,8 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    //Implement login functionality much later
+
+
 }
