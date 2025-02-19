@@ -21,13 +21,13 @@
          </columns>
       </TableView>
       <BorderPane layoutX="449.0" layoutY="51.0" prefHeight="267.0" prefWidth="200.0" />
-      <Button layoutX="458.0" layoutY="318.0" mnemonicParsing="false" text="Manage Event" />
+      <Button fx:id="manageEventButton" layoutX="458.0" layoutY="318.0" mnemonicParsing="false" onAction="#onManageButtonPressed" text="Manage Event" />
       <Label layoutX="477.0" layoutY="26.0" text="No Selected Event">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="458.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Create Event" />
+      <Button fx:id="createEventButton" layoutX="458.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="92.0" text="Create Event" />
       <Button fx:id="ticketsButton" layoutX="570.0" layoutY="318.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="52.0" prefWidth="92.0" text="Tickets">
          <font>
             <Font size="18.0" />

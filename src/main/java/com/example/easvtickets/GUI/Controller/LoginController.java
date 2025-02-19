@@ -20,6 +20,16 @@ public class LoginController implements Initializable {
     @FXML
     private Button adminLogin;
 
+    /**Implement:
+     * Login functionality
+     * Error displays
+     * MAKE SURE TO CHANGE onCoordLoginPressed and onAdminLoginPressed when Login Functionality has been added
+     * to support the changes. This requires creating login methods in the respective DAL/BLL classes
+     * The methods are fine for now as they are just for testing purposes
+     * **/
+
+
+
     @FXML
     private void onCoordLoginPressed() throws IOException {
 

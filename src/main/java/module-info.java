@@ -10,6 +10,7 @@ module com.example.easvtickets {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires javafx.swing;
 
     opens com.example.easvtickets to javafx.fxml;
     exports com.example.easvtickets;
