@@ -3,12 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="button-login" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
    <children>
       <Text layoutX="134.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
@@ -33,6 +34,11 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="adminLogin" layoutX="319.0" layoutY="128.0" mnemonicParsing="false" onAction="#onAdminLoginPressed" text="AdminTest" />
+      <Button fx:id="adminLogin" layoutX="319.0" layoutY="128.0" mnemonicParsing="false" onAction="#onAdminLoginPressed" styleClass="button-login" stylesheets="@style.css" text="AdminTest" />
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/easv.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

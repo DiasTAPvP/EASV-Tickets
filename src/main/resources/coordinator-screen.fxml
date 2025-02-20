@@ -5,33 +5,40 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="678.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
-      <TableView layoutX="27.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="table" stylesheets="@style.css">
+      <TableView layoutX="27.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css">
         <columns>
           <TableColumn prefWidth="199.0" text="My Events" />
         </columns>
       </TableView>
-      <TableView layoutX="237.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0">
+      <TableView layoutX="237.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables">
          <columns>
             <TableColumn prefWidth="199.0" text="Events" />
          </columns>
       </TableView>
-      <Button fx:id="manageEventButton" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#onManageButtonPressed" text="Manage Event" />
+      <Button fx:id="manageEventButton" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#onManageButtonPressed" styleClass="button-login" text="Manage Event" />
       <Label layoutX="478.0" layoutY="13.0" text="No Selected Event">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createEventButton" layoutX="458.0" layoutY="358.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="92.0" text="Create Event" />
-      <Button fx:id="ticketsButton" layoutX="566.0" layoutY="334.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="52.0" prefWidth="92.0" text="Tickets">
+      <Button fx:id="createEventButton" layoutX="458.0" layoutY="358.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="27.0" prefWidth="94.0" styleClass="button-login" text="Create Event" />
+      <Button fx:id="ticketsButton" layoutX="566.0" layoutY="334.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="52.0" prefWidth="92.0" styleClass="button-login" text="Tickets">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextArea layoutX="458.0" layoutY="40.0" prefHeight="294.0" prefWidth="200.0" />
+      <TextArea layoutX="458.0" layoutY="40.0" prefHeight="294.0" prefWidth="200.0" styleClass="tables" />
+      <ImageView fitHeight="27.0" fitWidth="58.0" layoutX="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/easv.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
