@@ -4,28 +4,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
    <children>
-      <TableView layoutX="37.0" layoutY="36.0" prefHeight="344.0" prefWidth="200.0">
+      <TableView layoutX="14.0" layoutY="36.0" prefHeight="344.0" prefWidth="181.0">
          <columns>
-            <TableColumn prefWidth="199.0" text="People" />
+            <TableColumn prefWidth="180.0" text="People" />
          </columns>
       </TableView>
-      <TableView layoutX="247.0" layoutY="36.0" prefHeight="344.0" prefWidth="200.0">
+      <TableView layoutX="201.0" layoutY="36.0" prefHeight="344.0" prefWidth="173.0">
          <columns>
-            <TableColumn prefWidth="199.0" text="Events" />
+            <TableColumn prefWidth="172.0" text="Events" />
          </columns>
       </TableView>
-      <BorderPane layoutX="459.0" layoutY="61.0" prefHeight="288.0" prefWidth="200.0" />
-      <Button fx:id="manageEntityButton" layoutX="514.0" layoutY="355.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" text="Manage Entity" />
-      <Label layoutX="469.0" layoutY="36.0" text="Currently Selected Info">
+      <Button fx:id="manageEntityButton" layoutX="440.0" layoutY="355.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" text="Manage Entity" />
+      <Label layoutX="396.0" layoutY="9.0" text="Currently Selected Info">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <TextArea layoutX="386.0" layoutY="36.0" prefHeight="319.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

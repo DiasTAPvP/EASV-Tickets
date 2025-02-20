@@ -3,46 +3,44 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-             fx:controller="com.example.easvtickets.GUI.Controller.NewEventController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.NewEventController">
    <children>
-      <BorderPane layoutX="358.0" layoutY="67.0" prefHeight="267.0" prefWidth="200.0" />
-      <TextField layoutX="59.0" layoutY="67.0" />
-      <Text layoutX="85.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Types">
+      <TextField layoutX="59.0" layoutY="93.0" />
+      <Text layoutX="85.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Types">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="59.0" layoutY="100.0" />
-      <TextField layoutX="59.0" layoutY="132.0" />
-      <TextField layoutX="59.0" layoutY="166.0" />
-      <TextField layoutX="59.0" layoutY="279.0" />
-      <Text layoutX="85.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Tickets?">
+      <TextField layoutX="59.0" layoutY="126.0" />
+      <TextField layoutX="59.0" layoutY="158.0" />
+      <TextField layoutX="59.0" layoutY="192.0" />
+      <TextField layoutX="59.0" layoutY="321.0" />
+      <Text layoutX="85.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Tickets?">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label layoutX="418.0" layoutY="32.0" text="Event Info">
+      <Label layoutX="418.0" layoutY="14.0" text="Event Info">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="103.0" layoutY="325.0" mnemonicParsing="false" text="Save">
+      <Button layoutX="428.0" layoutY="347.0" mnemonicParsing="false" text="Save">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <CheckBox layoutX="216.0" layoutY="278.0" mnemonicParsing="false">
+      <CheckBox layoutX="217.0" layoutY="320.0" mnemonicParsing="false">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
+      <TextArea layoutX="358.0" layoutY="45.0" prefHeight="293.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
