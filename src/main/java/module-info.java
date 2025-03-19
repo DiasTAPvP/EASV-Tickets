@@ -13,6 +13,7 @@ module com.example.easvtickets {
     requires javafx.swing;
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
+    requires java.naming;
 
     opens com.example.easvtickets to javafx.fxml;
     exports com.example.easvtickets;

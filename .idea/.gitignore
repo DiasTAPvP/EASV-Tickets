@@ -1,10 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/config/
-/config.settings
+
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+#Files that store user-specific settings
+/config/
+/config.settings
