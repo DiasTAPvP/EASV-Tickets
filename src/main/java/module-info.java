@@ -11,6 +11,8 @@ module com.example.easvtickets {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires javafx.swing;
+    requires java.sql;
+    requires com.microsoft.sqlserver.jdbc;
 
     opens com.example.easvtickets to javafx.fxml;
     exports com.example.easvtickets;
