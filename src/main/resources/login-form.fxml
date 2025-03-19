@@ -21,8 +21,8 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <PasswordField layoutX="224.0" layoutY="89.0" prefHeight="25.0" prefWidth="142.0" />
-      <TextField layoutX="224.0" layoutY="54.0" prefHeight="25.0" prefWidth="142.0" />
+      <PasswordField fx:id="loginPassword" layoutX="224.0" layoutY="89.0" prefHeight="25.0" prefWidth="142.0" />
+      <TextField fx:id="loginUsername" layoutX="224.0" layoutY="54.0" prefHeight="25.0" prefWidth="142.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="155.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASV Ticket Login">
          <font>

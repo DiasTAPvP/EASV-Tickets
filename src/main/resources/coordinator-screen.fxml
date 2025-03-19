@@ -12,18 +12,18 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="678.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
-      <TableView layoutX="27.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css">
+      <TableView fx:id="personalEventsCoord" layoutX="27.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css">
         <columns>
           <TableColumn prefWidth="199.0" text="My Events" />
         </columns>
       </TableView>
-      <TableView layoutX="237.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables">
+      <TableView fx:id="allEventsCoord" layoutX="237.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables">
          <columns>
             <TableColumn prefWidth="199.0" text="Events" />
          </columns>
       </TableView>
       <Button fx:id="manageEventButton" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#onManageButtonPressed" styleClass="button-login" text="Manage Event" />
-      <Label layoutX="478.0" layoutY="13.0" text="No Selected Event">
+      <Label fx:id="eventNameTextCoord" layoutX="478.0" layoutY="13.0" text="No Selected Event">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,7 +34,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <TextArea layoutX="458.0" layoutY="40.0" prefHeight="294.0" prefWidth="200.0" styleClass="tables" />
+      <TextArea fx:id="currentEventInfoCoord" layoutX="458.0" layoutY="40.0" prefHeight="294.0" prefWidth="200.0" styleClass="tables" />
       <ImageView fitHeight="27.0" fitWidth="58.0" layoutX="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />

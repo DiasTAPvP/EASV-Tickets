@@ -13,16 +13,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.NewEventController">
    <children>
-      <TextField layoutX="59.0" layoutY="93.0" />
+      <TextField fx:id="ticketType1" layoutX="59.0" layoutY="93.0" />
       <Text layoutX="85.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Types">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="59.0" layoutY="126.0" />
-      <TextField layoutX="59.0" layoutY="158.0" />
-      <TextField layoutX="59.0" layoutY="192.0" />
-      <TextField layoutX="59.0" layoutY="321.0" />
+      <TextField fx:id="ticketType2" layoutX="59.0" layoutY="126.0" />
+      <TextField fx:id="ticketType3" layoutX="59.0" layoutY="158.0" />
+      <TextField fx:id="ticketType4" layoutX="59.0" layoutY="192.0" />
+      <TextField fx:id="freeTicketType" layoutX="59.0" layoutY="321.0" />
       <Text layoutX="85.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Tickets?">
          <font>
             <Font size="18.0" />
@@ -33,17 +33,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="417.0" layoutY="346.0" mnemonicParsing="false" styleClass="button-login" stylesheets="@style.css" text="Save">
+      <Button fx:id="eventSaveButton" layoutX="417.0" layoutY="346.0" mnemonicParsing="false" onAction="#onCreate" styleClass="button-login" stylesheets="@style.css" text="Save">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <CheckBox layoutX="217.0" layoutY="320.0" mnemonicParsing="false">
+      <CheckBox fx:id="freeTicketCheckBox" layoutX="217.0" layoutY="320.0" mnemonicParsing="false">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <TextArea layoutX="348.0" layoutY="46.0" prefHeight="293.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css" />
+      <TextArea fx:id="newEventInfo" layoutX="348.0" layoutY="46.0" prefHeight="293.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css" />
       <ImageView fitHeight="79.0" fitWidth="118.0" layoutX="217.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />

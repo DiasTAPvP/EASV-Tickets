@@ -12,23 +12,23 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
    <children>
-      <TableView layoutX="14.0" layoutY="36.0" prefHeight="344.0" prefWidth="181.0">
+      <TableView fx:id="userTableAdmin" layoutX="14.0" layoutY="36.0" prefHeight="344.0" prefWidth="181.0">
          <columns>
             <TableColumn prefWidth="180.0" text="People" />
          </columns>
       </TableView>
-      <TableView layoutX="201.0" layoutY="36.0" prefHeight="344.0" prefWidth="173.0">
+      <TableView fx:id="eventTableAdmin" layoutX="201.0" layoutY="36.0" prefHeight="344.0" prefWidth="173.0">
          <columns>
             <TableColumn prefWidth="172.0" text="Events" />
          </columns>
       </TableView>
       <Button fx:id="manageEntityButton" layoutX="440.0" layoutY="355.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" styleClass="button-login" stylesheets="@style.css" text="Manage Entity" />
-      <Label layoutX="396.0" layoutY="9.0" text="Currently Selected Info">
+      <Label fx:id="infoTextAdmin" layoutX="396.0" layoutY="9.0" text="Currently Selected Info">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea layoutX="386.0" layoutY="36.0" prefHeight="319.0" prefWidth="200.0" />
+      <TextArea fx:id="entityInfoAdmin" layoutX="386.0" layoutY="36.0" prefHeight="319.0" prefWidth="200.0" />
       <ImageView fitHeight="27.0" fitWidth="58.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />

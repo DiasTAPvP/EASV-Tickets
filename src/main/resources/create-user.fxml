@@ -11,12 +11,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CreateUserController">
    <children>
-      <Button layoutX="464.0" layoutY="345.0" mnemonicParsing="false" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
-      <Button cancelButton="true" layoutX="46.0" layoutY="345.0" mnemonicParsing="false" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
-      <TextField layoutX="300.0" layoutY="101.0" />
-      <TextField layoutX="300.0" layoutY="133.0" />
-      <TextField layoutX="331.0" layoutY="165.0" prefHeight="25.0" prefWidth="118.0" />
-      <Button alignment="BOTTOM_CENTER" layoutX="301.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
+      <Button fx:id="saveNewUserButton" layoutX="464.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCreateUser" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
+      <Button fx:id="userCancelButton" cancelButton="true" layoutX="46.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
+      <TextField fx:id="newUserName" layoutX="300.0" layoutY="101.0" />
+      <TextField fx:id="newUserPassword" layoutX="300.0" layoutY="133.0" />
+      <TextField fx:id="newUserPassword" layoutX="331.0" layoutY="165.0" prefHeight="25.0" prefWidth="118.0" />
+      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="301.0" layoutY="165.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
       <Text layoutX="208.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
             <Font size="18.0" />
@@ -42,12 +42,12 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <CheckBox layoutX="301.0" layoutY="196.0" mnemonicParsing="false">
+      <CheckBox fx:id="makeCoordCheck" layoutX="301.0" layoutY="196.0" mnemonicParsing="false">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox layoutX="301.0" layoutY="229.0" mnemonicParsing="false">
+      <CheckBox fx:id="makeAdminCheck" layoutX="301.0" layoutY="229.0" mnemonicParsing="false">
          <font>
             <Font size="18.0" />
          </font>
