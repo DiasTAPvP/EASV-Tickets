@@ -1,12 +1,14 @@
 package com.example.easvtickets.GUI.Controller;
 
+import com.example.easvtickets.BE.Users;
+import com.example.easvtickets.DAL.UserDAO;
+import com.example.easvtickets.BLL.Util.BCryptUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,23 +22,17 @@ public class LoginController implements Initializable {
     @FXML
     private Button adminLogin;
 
-    /**Implement:
-     * Login functionality
-     * Error displays
-     * MAKE SURE TO CHANGE onCoordLoginPressed and onAdminLoginPressed when Login Functionality has been added
-     * to support the changes. This requires creating login methods in the respective DAL/BLL classes
-     * The methods are fine for now as they are just for testing purposes
-     * **/
+    private UserDAO userDAO;
 
-
+    public LoginController() throws IOException {
+        userDAO = new UserDAO();
+    }
 
     @FXML
     private void onCoordLoginPressed() throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-screen.fxml"));
         Parent root = loader.load();
 
-        //Get the controller and set the controller
         CoordScreenController coordcontroller = loader.getController();
         coordcontroller.setLoginController(this);
 
@@ -50,13 +46,11 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
-
     @FXML
     private void onAdminLoginPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-screen.fxml"));
         Parent root = loader.load();
 
-        //Get the controller and set the controller
         AdminScreenController admincontroller = loader.getController();
         admincontroller.setLoginController(this);
 
@@ -68,15 +62,17 @@ public class LoginController implements Initializable {
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
-    //Implement login functionality much later
-
-
+    public boolean login(String username, String password) {
+        Users user = userDAO.getUsername(username);
+        if (user != null) {
+            return BCryptUtil.checkPassword(password, user.getPasswordhash());
+        }
+        return false;
+    }
 }

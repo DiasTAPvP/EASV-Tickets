@@ -39,6 +39,11 @@
       <artifactId>mssql-jdbc</artifactId>
       <version>10.2.0.jre11</version>
     </dependency>
+      <dependency>
+          <groupId>at.favre.lib</groupId>
+          <artifactId>bcrypt</artifactId>
+          <version>0.10.2</version>
+      </dependency>
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
