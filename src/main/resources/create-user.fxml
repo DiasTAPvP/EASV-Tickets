@@ -13,41 +13,31 @@
    <children>
       <Button fx:id="saveNewUserButton" layoutX="464.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCreateUser" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
       <Button fx:id="userCancelButton" cancelButton="true" layoutX="46.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
-      <TextField fx:id="newUserName" layoutX="300.0" layoutY="101.0" />
-      <TextField fx:id="newUserPassword" layoutX="300.0" layoutY="133.0" />
-      <TextField fx:id="newUserPassword" layoutX="331.0" layoutY="165.0" prefHeight="25.0" prefWidth="118.0" />
-      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="301.0" layoutY="165.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
-      <Text layoutX="208.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+      <TextField fx:id="newUserName" layoutX="299.0" layoutY="134.0" />
+      <TextField fx:id="newUserEmail" layoutX="299.0" layoutY="166.0" />
+      <TextField fx:id="newUserPassword" layoutX="330.0" layoutY="198.0" prefHeight="25.0" prefWidth="118.0" />
+      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="300.0" layoutY="198.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
+      <Text layoutX="207.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="237.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
+      <Text layoutX="236.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="134.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Password:">
+      <Text layoutX="133.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Password:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="143.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Coordinator:">
+      <Text layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Admin:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="186.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Admin:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <CheckBox fx:id="makeCoordCheck" layoutX="301.0" layoutY="196.0" mnemonicParsing="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="makeAdminCheck" layoutX="301.0" layoutY="229.0" mnemonicParsing="false">
+      <CheckBox fx:id="makeAdminCheck" layoutX="300.0" layoutY="230.0" mnemonicParsing="false">
          <font>
             <Font size="18.0" />
          </font>
