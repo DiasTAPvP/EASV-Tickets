@@ -7,8 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements IUserDataAccess {
 
     private DBConnector dbConnector;
 
@@ -16,6 +17,27 @@ public class UserDAO {
         dbConnector = new DBConnector();
     }
 
+    @Override
+    public List<Users> getAllUsers() throws Exception {
+        return null;
+    }
+
+    @Override
+    public Users createUser(Users newUser) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(Users user) throws Exception {
+
+    }
+
+    @Override
+    public void updateUser(Users user) throws Exception {
+
+    }
+
+    @Override
     public Users getUsername(String username) {
         try (Connection connection = dbConnector.getConnection()) {
             String sql = "SELECT * FROM Users WHERE username = ?";
@@ -37,4 +59,7 @@ public class UserDAO {
         }
         return null;
     }
+
+
+
 }

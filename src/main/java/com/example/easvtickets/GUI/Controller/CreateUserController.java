@@ -24,7 +24,7 @@ public class CreateUserController {
 
     //Method to create a new user
     @FXML
-    public void onCreate() throws Exception {
+    public void onCreateUser() throws Exception {
 
     }
 

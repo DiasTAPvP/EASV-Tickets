@@ -33,9 +33,7 @@ public class Users {
     public boolean getIsadmin() {
         return this.isadmin;
     }
-    public Timestamp getCreatedat() {
-        return this.createdat;
-    }
+    public Timestamp getCreatedat() {return this.createdat;}
 
 
     //Setters

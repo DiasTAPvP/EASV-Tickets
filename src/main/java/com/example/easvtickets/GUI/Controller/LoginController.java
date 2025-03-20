@@ -1,6 +1,7 @@
 package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Users;
+import com.example.easvtickets.BLL.UserManager;
 import com.example.easvtickets.DAL.UserDAO;
 import com.example.easvtickets.BLL.Util.BCryptUtil;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,47 +24,61 @@ public class LoginController implements Initializable {
     private Button coordLogin;
     @FXML
     private Button adminLogin;
+    @FXML
+    private TextField loginUsername;
+    @FXML
+    private PasswordField loginPassword;
 
-    private UserDAO userDAO;
+    private UserManager userManager;
 
     public LoginController() throws IOException {
-        userDAO = new UserDAO();
+        userManager = new UserManager();
     }
 
     @FXML
     private void onCoordLoginPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-screen.fxml"));
-        Parent root = loader.load();
+        if (login(loginUsername.getText(), loginPassword.getText())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-screen.fxml"));
+            Parent root = loader.load();
 
-        CoordScreenController coordcontroller = loader.getController();
-        coordcontroller.setLoginController(this);
+            CoordScreenController coordcontroller = loader.getController();
+            coordcontroller.setLoginController(this);
 
-        Stage loginStage = (Stage) coordLogin.getScene().getWindow();
-        loginStage.close();
+            Stage loginStage = (Stage) coordLogin.getScene().getWindow();
+            loginStage.close();
 
-        Stage stage = new Stage();
-        stage.setTitle("Welcome Coordinator");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Welcome Coordinator");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } else {
+            // Show error message
+
+        }
     }
+
 
     @FXML
     private void onAdminLoginPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-screen.fxml"));
-        Parent root = loader.load();
+        if (login(loginUsername.getText(), loginPassword.getText())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-screen.fxml"));
+            Parent root = loader.load();
 
-        AdminScreenController admincontroller = loader.getController();
-        admincontroller.setLoginController(this);
+            AdminScreenController admincontroller = loader.getController();
+            admincontroller.setLoginController(this);
 
-        Stage loginStage = (Stage) adminLogin.getScene().getWindow();
-        loginStage.close();
+            Stage loginStage = (Stage) adminLogin.getScene().getWindow();
+            loginStage.close();
 
-        Stage stage = new Stage();
-        stage.setTitle("Welcome Admin");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Welcome Admin");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } else {
+            // Handle login failure (e.g., show an error message)
+        }
     }
 
     @Override
@@ -69,7 +86,7 @@ public class LoginController implements Initializable {
     }
 
     public boolean login(String username, String password) {
-        Users user = userDAO.getUsername(username);
+        Users user = userManager.getUsername(username);
         if (user != null) {
             return BCryptUtil.checkPassword(password, user.getPasswordhash());
         }
