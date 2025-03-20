@@ -1,7 +1,7 @@
 package com.example.easvtickets.BLL;
 
 import com.example.easvtickets.DAL.IUserDataAccess;
-import com.example.easvtickets.DAL.UserDAO;
+import com.example.easvtickets.DAL.DAO.UserDAO;
 import com.example.easvtickets.BE.Users;
 
 import java.io.IOException;

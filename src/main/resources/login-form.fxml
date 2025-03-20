@@ -29,7 +29,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="coordLogin" layoutX="224.0" layoutY="127.0" mnemonicParsing="false" onAction="#onCoordLoginPressed" prefHeight="25.0" prefWidth="79.0" styleClass="button-login" stylesheets="@style.css" text="Login">
+      <Button fx:id="coordLogin" layoutX="224.0" layoutY="127.0" mnemonicParsing="false" onAction="#onLoginPressed" prefHeight="25.0" prefWidth="79.0" styleClass="button-login" stylesheets="@style.css" text="Login">
          <font>
             <Font size="13.0" />
          </font>

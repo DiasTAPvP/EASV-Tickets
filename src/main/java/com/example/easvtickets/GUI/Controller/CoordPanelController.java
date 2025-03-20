@@ -4,7 +4,10 @@ public class CoordPanelController {
 
     private CoordScreenController setCoordScreenController;
 
-    public void setCoordScreenController(CoordScreenController coordScreenController) { {this.setCoordScreenController = coordScreenController;}
+    public void setCoordScreenController(CoordScreenController coordScreenController) {
+        {
+            this.setCoordScreenController = coordScreenController;
+        }
     }
 
     /**Implement:
