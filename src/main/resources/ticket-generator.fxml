@@ -13,14 +13,21 @@
 
 <AnchorPane prefHeight="469.0" prefWidth="600.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketController">
    <children>
-      <HBox layoutX="307.0" layoutY="148.0" prefHeight="142.0" prefWidth="269.0" />
-      <Label layoutX="365.0" layoutY="112.0" text="No  Selected Ticket">
+      <HBox layoutX="221.0" layoutY="148.0" prefHeight="145.0" prefWidth="373.0">
+         <children>
+            <ImageView fitHeight="146.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/bar3.png" />
+               </image>
+            </ImageView>
+         </children></HBox>
+      <Label layoutX="332.0" layoutY="105.0" text="No  Selected Ticket">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="441.0" layoutY="291.0" mnemonicParsing="false" styleClass="button-login" text="Send Ticket" />
-      <Button layoutX="366.0" layoutY="291.0" mnemonicParsing="false" styleClass="button-login" text="Print Ticket" />
+      <Button layoutX="409.0" layoutY="292.0" mnemonicParsing="false" styleClass="button-login" text="Send Ticket" />
+      <Button layoutX="332.0" layoutY="292.0" mnemonicParsing="false" styleClass="button-login" text="Print Ticket" />
       <TextField layoutX="131.0" layoutY="40.0" />
       <TextField layoutX="131.0" layoutY="73.0" />
       <CheckBox layoutX="76.0" layoutY="265.0" mnemonicParsing="false">
@@ -58,7 +65,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <CheckBox layoutX="76.0" layoutY="303.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="149.0" text="Special Ticket">
+      <CheckBox layoutX="76.0" layoutY="303.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="149.0" text="Free Ticket">
          <font>
             <Font size="18.0" />
          </font>

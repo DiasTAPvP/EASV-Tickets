@@ -33,12 +33,9 @@ public class CreateUserController {
     
     /**Implement:
      * Error displays
-     * onCreate functionality
      * Initialize (setting up a generated password immediately?)
      * Button functionality (save, cancel)
      * The ability to send an email to the created user/coordinator with their login information on creation
-     * Checkbox functionality for the user type
-     * Password generator and hider functionality
      */
 
 

@@ -1,6 +1,7 @@
 package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 
@@ -16,6 +17,9 @@ public class CoordPanelController {
         }
     }
 
+    public void coordDeleteButtonPressed(ActionEvent actionEvent) {
+    }
+
     /**
      * Implement:
      * Table refreshes for the user/coordinator tables
@@ -26,7 +30,7 @@ public class CoordPanelController {
      * Save button functionality
      */
 
-    public Events getselectedEvent() {
+    /*public Events getselectedEvent() {
         return selectedEvent;
     }
 
@@ -40,5 +44,5 @@ public class CoordPanelController {
             Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
 
         }
-    }
+    }*/
 }

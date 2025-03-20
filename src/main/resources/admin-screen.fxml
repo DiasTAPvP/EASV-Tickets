@@ -19,7 +19,8 @@
       </TableView>
       <TableView fx:id="eventTableAdmin" layoutX="201.0" layoutY="36.0" prefHeight="344.0" prefWidth="173.0">
          <columns>
-            <TableColumn prefWidth="172.0" text="Events" />
+            <TableColumn fx:id="eventNameColumn" prefWidth="101.0" text="Event" />
+            <TableColumn fx:id="eventDateColumn" prefWidth="71.0" text="Date" />
          </columns>
       </TableView>
       <Button fx:id="manageEntityButton" layoutX="440.0" layoutY="355.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" styleClass="button-login" stylesheets="@style.css" text="Manage Entity" />

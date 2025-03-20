@@ -19,7 +19,8 @@
       </TableView>
       <TableView fx:id="allEventsCoord" layoutX="237.0" layoutY="40.0" prefHeight="344.0" prefWidth="200.0" styleClass="tables">
          <columns>
-            <TableColumn prefWidth="199.0" text="Events" />
+            <TableColumn fx:id="eventNameColumn" prefWidth="119.0" text="Event" />
+            <TableColumn fx:id="eventDateColumn" prefWidth="79.0" text="Date" />
          </columns>
       </TableView>
       <Button fx:id="manageEventButton" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#onManageButtonPressed" styleClass="button-login" text="Manage Event" />
