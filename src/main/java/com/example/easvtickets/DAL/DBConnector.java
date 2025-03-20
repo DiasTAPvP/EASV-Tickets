@@ -1,4 +1,4 @@
-/*package com.example.easvtickets.DAL;
+package com.example.easvtickets.DAL;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -43,5 +43,5 @@ public class DBConnector {
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }
-}*/
+}
 

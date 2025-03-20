@@ -1,5 +1,11 @@
 package com.example.easvtickets.GUI.Controller;
 
+import com.example.easvtickets.BE.Events;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+
+import javax.swing.*;
+
 public class CoordPanelController {
 
     private CoordScreenController setCoordScreenController;
@@ -10,7 +16,8 @@ public class CoordPanelController {
         }
     }
 
-    /**Implement:
+    /**
+     * Implement:
      * Table refreshes for the user/coordinator tables
      * Some sort of listener to display the info of whatever event was selected
      * The ability to edit the info of the selected event
@@ -19,4 +26,19 @@ public class CoordPanelController {
      * Save button functionality
      */
 
+    public Events getselectedEvent() {
+        return selectedEvent;
+    }
+
+
+    @FXML
+    private void onCordDeleteButtonPressed() throws Exception {
+        //Implement functionality
+        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+        if (answer == JOptionPane.YES_OPTION) {
+            Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
+
+        }
+    }
 }

@@ -23,8 +23,8 @@ public class EventManager {
         return eventDAO.createEvent(newEvent);
     }
 
-    public void deleteEvent(Events event) throws Exception {
-        eventDAO.deleteEvent(event);
+    public void deleteEvent(Events selectedEvent) throws Exception {
+        eventDAO.deleteEvent(selectedEvent);
     }
 
     public void updateEvent(Events event) throws Exception {
