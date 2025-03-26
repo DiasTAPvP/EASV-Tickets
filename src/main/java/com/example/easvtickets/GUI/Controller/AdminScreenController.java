@@ -2,6 +2,8 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.Users;
+import com.example.easvtickets.BLL.UserManager;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import com.example.easvtickets.DAL.DAO.UserDAO;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -110,6 +113,31 @@ public class AdminScreenController {
         details.append("Optional Information: ").append(event.getOptionalInformation()).append("\n");
 
         entityInfoAdmin.setText(details.toString());
+    }
+    @FXML
+    private void onAdminDeleteButtonPressed() throws Exception {
+        //Implement functionality
+        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the event or coordinator?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+        if (answer == JOptionPane.YES_OPTION) {
+            Events selectedEvent = (Events) eventTableAdmin.getSelectionModel().getSelectedItem();
+            Users selectedUser = (Users) userTableAdmin.getSelectionModel().getSelectedItem();
+
+            if (selectedEvent != null) {
+                eventDAO.deleteEvent(selectedEvent);
+                eventTableAdmin.getItems().remove(selectedEvent);
+                System.out.println("Event deleted succesfully.");
+
+            } else if (selectedUser != null) {
+                userDAO.deleteUser(selectedUser);
+                userTableAdmin.getItems().remove(selectedUser);
+                System.out.println("User deleted succesfully.");
+
+            } else {
+                System.out.println("No event or user selected.");
+
+            }
+        }
     }
 
 }

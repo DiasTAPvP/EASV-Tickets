@@ -18,23 +18,36 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.sql.Timestamp;
 import java.util.List;
 import java.io.IOException;
 
 public class CoordScreenController {
 
-    @FXML private Button ticketsButton;
-    @FXML private Button manageEventButton;
-    @FXML private Button createEventButton;
-    @FXML private TableView<Events> allEventsCoord;
-    @FXML private TableColumn<Events, Integer> eventIdColumn;
-    @FXML private TableColumn<Events, String> eventNameColumn;
-    @FXML private TableColumn<Events, Timestamp> eventDateColumn;
-    @FXML private TableColumn<Events, String> eventDescriptionColumn;
-    @FXML private TableColumn<Events, String> eventLocationColumn;
-    @FXML private TableColumn<Events, Integer> availableTicketsColumn;
-    @FXML private TextArea currentEventInfoCoord;
+    @FXML
+    private Button ticketsButton;
+    @FXML
+    private Button manageEventButton;
+    @FXML
+    private Button createEventButton;
+    @FXML TableView<Events> personalEventsCoord;
+    @FXML
+    private TableView<Events> allEventsCoord;
+    @FXML
+    private TableColumn<Events, Integer> eventIdColumn;
+    @FXML
+    private TableColumn<Events, String> eventNameColumn;
+    @FXML
+    private TableColumn<Events, Timestamp> eventDateColumn;
+    @FXML
+    private TableColumn<Events, String> eventDescriptionColumn;
+    @FXML
+    private TableColumn<Events, String> eventLocationColumn;
+    @FXML
+    private TableColumn<Events, Integer> availableTicketsColumn;
+    @FXML
+    private TextArea currentEventInfoCoord;
 
     private EventDAO eventDAO;
 
@@ -48,12 +61,12 @@ public class CoordScreenController {
         this.loginController = loginController;
     }
 
-    /**Implement:
+    /**
+     * Implement:
      * Table refreshes.
      * Initialize to set up tables on boot
      * Distinction between your assigned events and all events
      */
-
 
 
     @FXML
@@ -140,5 +153,24 @@ public class CoordScreenController {
         details.append("Optional Information: ").append(event.getOptionalInformation()).append("\n");
 
         currentEventInfoCoord.setText(details.toString());
+    }
+
+    @FXML
+    private void onCoordDeleteButtonPressed() throws Exception {
+
+        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+        if (answer == JOptionPane.YES_OPTION) {
+            Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
+
+            if (selectedEvent != null) {
+                eventDAO.deleteEvent(selectedEvent);
+                personalEventsCoord.getItems().remove(selectedEvent);
+                System.out.println("Event deleted succesfully.");
+            } else {
+                System.out.println("No event selected.");
+
+            }
+        }
     }
 }

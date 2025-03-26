@@ -86,6 +86,19 @@ public class EventDAO implements IEventDataAccess {
 
     @Override
     public void deleteEvent(Events event) throws Exception {
+        String sql = "DELETE FROM dbo.Users WHERE eventid = ?";
+
+        try (Connection connection = dbConnector.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setInt(1, event.getEventId());
+
+            //Run the SQL statement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new Exception("Could not get user from database.", ex);
+        }
 
     }
 
