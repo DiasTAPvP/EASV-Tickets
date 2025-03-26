@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,46 +9,35 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.PasswordField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CreateUserController">
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CreateUserController">
    <children>
-      <Button fx:id="saveNewUserButton" layoutX="464.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCreateUser" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
-      <Button fx:id="userCancelButton" cancelButton="true" layoutX="46.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
-      <TextField fx:id="newUserName" layoutX="299.0" layoutY="134.0" />
-      <TextField fx:id="newUserEmail" layoutX="299.0" layoutY="166.0" />
-      <PasswordField fx:id="newUserPassword" layoutX="330.0" layoutY="198.0" prefHeight="25.0" prefWidth="118.0" />
-      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="300.0" layoutY="198.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
-      <Text layoutX="207.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+      <Button fx:id="saveNewUserButton" layoutX="274.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCreateUser" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
+      <Button fx:id="userCancelButton" cancelButton="true" layoutX="94.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
+      <TextField fx:id="newUserName" layoutX="237.0" layoutY="42.0" prefWidth="190.0" />
+      <TextField fx:id="newUserEmail" layoutX="237.0" layoutY="71.0" prefWidth="190.0" />
+      <PasswordField fx:id="newUserPassword" layoutX="237.0" layoutY="103.0" prefHeight="25.0" prefWidth="190.0" />
+      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="433.0" layoutY="103.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
+      <Text layoutX="147.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="236.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
+      <Text layoutX="176.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="133.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Password:">
+      <Text layoutX="73.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Password:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Admin:">
+      <Text layoutX="182.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create User" wrappingWidth="135.091796875">
          <font>
-            <Font size="18.0" />
+            <Font size="26.0" />
          </font>
       </Text>
-      <CheckBox fx:id="makeAdminCheck" layoutX="300.0" layoutY="230.0" mnemonicParsing="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </CheckBox>
-      <Text layoutX="246.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create User" wrappingWidth="135.091796875">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="135.0" fitWidth="180.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
          </image>
