@@ -1,5 +1,7 @@
 package com.example.easvtickets.GUI.Controller;
 
+import com.example.easvtickets.BE.Users;
+import com.example.easvtickets.BE.Events;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

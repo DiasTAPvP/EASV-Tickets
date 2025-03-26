@@ -45,7 +45,17 @@ public class UserDAO implements IUserDataAccess {
     @Override
     public void deleteUser(Users user) throws Exception {
 
+            stmt.setInt(1, users.getLoginid());
+
+            //Run the SQL statement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new Exception("Could not get user from database.", ex);
+        }
     }
+
+
 
     @Override
     public void updateUser(Users user) throws Exception {

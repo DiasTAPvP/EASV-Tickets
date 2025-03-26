@@ -3,6 +3,7 @@ package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.DAL.DAO.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +27,7 @@ public class AdminScreenController {
 
     @FXML private Button manageEntityButton;
     @FXML private TableView<Events> eventTableAdmin;
+    @FXML private TableView<Users> userTableAdmin;
     @FXML private TableColumn<Events, Integer> eventIdColumn;
     @FXML private TableColumn<Events, String> eventNameColumn;
     @FXML private TableColumn<Events, Timestamp> eventDateColumn;
@@ -35,9 +37,11 @@ public class AdminScreenController {
     @FXML private TextArea entityInfoAdmin;
 
     private EventDAO eventDAO;
+    private UserDAO userDAO;
 
     public AdminScreenController() throws IOException {
         this.eventDAO = new EventDAO();
+        this.userDAO = new UserDAO();
     }
 
     private LoginController loginController;
