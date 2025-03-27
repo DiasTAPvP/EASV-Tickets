@@ -11,35 +11,40 @@
 
 <AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CreateUserController">
    <children>
-      <Button fx:id="saveNewUserButton" layoutX="274.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCreateUser" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Save &amp; Send" />
-      <Button fx:id="userCancelButton" cancelButton="true" layoutX="94.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Cancel" />
-      <TextField fx:id="newUserName" layoutX="237.0" layoutY="42.0" prefWidth="190.0" />
-      <TextField fx:id="newUserEmail" layoutX="237.0" layoutY="71.0" prefWidth="190.0" />
-      <PasswordField fx:id="newUserPassword" layoutX="237.0" layoutY="103.0" prefHeight="25.0" prefWidth="190.0" />
-      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="433.0" layoutY="103.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" stylesheets="@style.css" text="*" />
-      <Text layoutX="147.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="176.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="73.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Password:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <Button fx:id="saveNewUserButton" layoutX="274.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCreateUser" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
+      <Button fx:id="userCancelButton" cancelButton="true" layoutX="112.0" layoutY="132.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
+      <TextField fx:id="newUserName" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="36.0" prefHeight="25.0" prefWidth="190.0" promptText="Username" />
+      <TextField fx:id="newUserEmail" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="66.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
+      <PasswordField fx:id="newUserPassword" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="97.0" prefHeight="25.0" prefWidth="190.0" promptText="Generate Password" />
+      <Button fx:id="passwordGeneratorButton" alignment="BOTTOM_CENTER" layoutX="351.0" layoutY="96.0" mnemonicParsing="false" onAction="#generatePassword" prefHeight="25.0" prefWidth="25.0" styleClass="button-login" stylesheets="@style.css" />
       <Text layoutX="182.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create User" wrappingWidth="135.091796875">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="319.0" layoutY="133.0">
+         <image>
+            <Image url="@images/cancle_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="145.0" layoutY="133.0">
+         <image>
+            <Image url="@images/save_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="170.0" layoutY="133.0">
+         <image>
+            <Image url="@images/send_icon2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="351.0" layoutY="97.0">
+         <image>
+            <Image url="@images/generate_pw_icon.png" />
          </image>
       </ImageView>
    </children>

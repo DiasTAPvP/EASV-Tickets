@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -13,59 +16,42 @@
 
 <AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.NewEventController">
    <children>
-      <TextField fx:id="newTicketType1" layoutX="169.0" layoutY="514.0" />
-      <Text layoutX="195.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Types">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="newFreeTicketType" layoutX="337.0" layoutY="514.0" />
-      <Text layoutX="361.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Tickets?">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Button fx:id="newEventSaveButton" layoutX="733.0" layoutY="665.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Save" />
+      <Button fx:id="newEventSaveButton" layoutX="466.0" layoutY="683.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
       <TextArea fx:id="newEventInfo" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css" />
-      <ImageView fitHeight="79.0" fitWidth="118.0" layoutX="14.0" layoutY="665.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="newEventName" layoutX="311.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
-      <Text layoutX="203.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Name:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="newEventLocation" layoutX="311.0" layoutY="216.0" prefHeight="25.0" prefWidth="190.0" />
-      <Text layoutX="155.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date for the event:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="132.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location of the event:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="296.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="62.162109375">
+      <TextField fx:id="newEventName" alignment="BOTTOM_CENTER" layoutX="192.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Event Name" />
+      <TextField fx:id="newEventLocation" alignment="BOTTOM_CENTER" layoutX="191.0" layoutY="161.0" prefHeight="25.0" prefWidth="190.0" promptText="Location of the Event" />
+      <Text layoutX="255.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="62.162109375">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <TextField fx:id="newTotalTickets" layoutX="311.0" layoutY="250.0" prefHeight="25.0" prefWidth="190.0" />
-      <Text layoutX="201.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Tickets:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextArea fx:id="newEventNotes" layoutX="158.0" layoutY="326.0" prefHeight="109.0" prefWidth="338.0" styleClass="tables" stylesheets="@style.css" />
-      <DatePicker fx:id="newEventDate" layoutX="311.0" layoutY="178.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="newTotalTickets" alignment="BOTTOM_CENTER" layoutX="192.0" layoutY="198.0" prefHeight="25.0" prefWidth="190.0" promptText="Total Tickets" />
+      <TextArea fx:id="newEventNotes" layoutX="118.0" layoutY="385.0" prefHeight="274.0" prefWidth="338.0" styleClass="tables" stylesheets="@style.css" />
+      <DatePicker fx:id="newEventDate" layoutX="192.0" layoutY="125.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="190.0" promptText="       Date For The event" />
       <Label fx:id="infoTextAdmin" layoutX="759.0" layoutY="44.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="511.0" layoutY="684.0">
+         <image>
+            <Image url="@images/save_icon.png" />
+         </image>
+      </ImageView>
+      <ComboBox layoutX="192.0" layoutY="233.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="190.0" promptText="                Ticket Type">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ComboBox>
+      <CheckBox layoutX="222.0" layoutY="266.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Free Tickets">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
    </children>
 </AnchorPane>

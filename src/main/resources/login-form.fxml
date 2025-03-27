@@ -11,28 +11,23 @@
 
 <AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
    <children>
-      <Text layoutX="133.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="136.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <PasswordField fx:id="loginPassword" layoutX="224.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" />
-      <TextField fx:id="loginUsername" layoutX="224.0" layoutY="54.0" prefHeight="25.0" prefWidth="190.0" />
+      <PasswordField fx:id="loginPassword" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="93.0" prefHeight="25.0" prefWidth="190.0" promptText="Passwoerd" />
+      <TextField fx:id="loginUsername" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="58.0" prefHeight="25.0" prefWidth="190.0" promptText="Username" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="147.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASV Ticket Login">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Button fx:id="coordLogin" layoutX="224.0" layoutY="127.0" mnemonicParsing="false" onAction="#onLoginPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" text="Login" />
-      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="coordLogin" layoutX="192.0" layoutY="131.0" mnemonicParsing="false" onAction="#onLoginPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="238.0" layoutY="132.0">
+         <image>
+            <Image url="@images/login_icon.png" />
          </image>
       </ImageView>
    </children>
