@@ -10,20 +10,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-public class NewEventController {
+public class EventWindowController {
 
     private CoordScreenController setCoordScreenController;
     private EventDAO eventDAO;
 
-    public NewEventController() throws IOException {
+    public EventWindowController() throws IOException {
         this.eventDAO = new EventDAO();
     }
-
-    @FXML private TextField newTicketType1;
-    @FXML private TextField newTicketType2;
-    @FXML private TextField newTicketType3;
-    @FXML private TextField newTicketType4;
-    @FXML private TextField newFreeTicketType;
     @FXML private Button newEventSaveButton;
     @FXML private TextArea newEventInfo;
     @FXML private TextField newEventName;
@@ -86,12 +80,26 @@ public class NewEventController {
         newEventNotes.clear();
         newTotalTickets.clear();
         newEventDate.setValue(null);
-        newTicketType1.clear();
-        newTicketType2.clear();
-        newTicketType3.clear();
-        newTicketType4.clear();
-        newFreeTicketType.clear();
     }
 
     public void setCoordScreenController(CoordScreenController coordScreenController) {this.setCoordScreenController = coordScreenController;}
-}
+
+    private Events selectedEvent;
+
+    public void setSelectedEvent(Events event) {
+        System.out.println("Editing event: " + event);
+        this.selectedEvent = event;
+        prefillFields();
+    }
+
+    private void prefillFields() {
+        if (selectedEvent != null) {
+            newEventName.setText(selectedEvent.getEventName());
+            newEventLocation.setText(selectedEvent.getLocation());
+            newEventInfo.setText(selectedEvent.getDescription());
+            newEventDate.setValue(selectedEvent.getEventDate().toLocalDateTime().toLocalDate());
+            newEventNotes.setText(selectedEvent.getNotes());
+            newTotalTickets.setText(String.valueOf(selectedEvent.getAvailableTickets()));
+        }
+        }
+    }

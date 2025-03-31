@@ -26,7 +26,7 @@
       <Button fx:id="manageEventButton" layoutX="610.0" layoutY="668.0" mnemonicParsing="false" onAction="#onManageButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
       <Button fx:id="createEventButton" layoutX="733.0" layoutY="668.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
       <Button fx:id="ticketsButton" layoutX="855.0" layoutY="668.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <TextArea fx:id="currentEventInfoCoord" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" />
+      <TextArea fx:id="currentEventInfoCoord" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" wrapText="true" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
@@ -50,6 +50,18 @@
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="778.0" layoutY="669.0">
          <image>
             <Image url="@images/create_event_icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="deleteEventButton" layoutX="237.0" layoutY="668.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="282.0" layoutY="669.0">
+         <image>
+            <Image url="@images/delete_icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="coordLogout" layoutX="913.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="958.0" layoutY="15.0">
+         <image>
+            <Image url="@images/logout_icon.png" />
          </image>
       </ImageView>
    </children>

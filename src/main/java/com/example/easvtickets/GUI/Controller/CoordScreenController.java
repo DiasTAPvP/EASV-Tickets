@@ -5,7 +5,6 @@ import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +16,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import com.example.easvtickets.GUI.Controller.EventWindowController;
+import javafx.event.ActionEvent;
 
 import javax.swing.*;
 import java.sql.Timestamp;
@@ -48,6 +49,8 @@ public class CoordScreenController {
     private TableColumn<Events, Integer> availableTicketsColumn;
     @FXML
     private TextArea currentEventInfoCoord;
+    @FXML
+    private Button coordLogout;
 
     private EventDAO eventDAO;
 
@@ -88,12 +91,18 @@ public class CoordScreenController {
 
     @FXML
     private void onManageButtonPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-panel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-event-view.fxml"));
         Parent root = loader.load();
 
-        //Get the controller and set the controller
-        CoordPanelController eventController = loader.getController();
-        eventController.setCoordScreenController(this);
+
+        Events selectedEvent = allEventsCoord.getSelectionModel().getSelectedItem();
+        System.out.println("Selected from table: " + selectedEvent);
+        System.out.println("Row selected in table? " + personalEventsCoord.getSelectionModel().isEmpty());
+        //Controller for new view
+        EventWindowController eventController = loader.getController();
+
+        //Passes selected event to edit
+        eventController.setSelectedEvent(selectedEvent);
 
         Stage stage = new Stage();
         stage.setTitle("Manage Events");
@@ -108,8 +117,8 @@ public class CoordScreenController {
         Parent root = loader.load();
 
         //Get the controller and set the controller
-        NewEventController newEventController = loader.getController();
-        newEventController.setCoordScreenController(this);
+        EventWindowController eventWindowController = loader.getController();
+        eventWindowController.setCoordScreenController(this);
 
         Stage stage = new Stage();
         stage.setTitle("Create Event");
@@ -172,5 +181,19 @@ public class CoordScreenController {
 
             }
         }
+    }
+    @FXML
+    private void onLogoutPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-form.fxml"));
+        Parent root = loader.load();
+
+        Stage stage= new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login");
+        stage.show();
+
+        //Closes current window
+        Stage currentStage = (Stage) coordLogout.getScene().getWindow();
+        currentStage.close();
     }
 }
