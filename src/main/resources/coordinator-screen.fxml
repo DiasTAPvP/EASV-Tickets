@@ -13,9 +13,9 @@
 <AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
       <TableView fx:id="personalEventsCoord" layoutX="94.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css">
-         <columns>
-            <TableColumn prefWidth="400.0" text="People" />
-         </columns>
+        <columns>
+          <TableColumn prefWidth="400.0" text="People" />
+        </columns>
       </TableView>
       <TableView fx:id="allEventsCoord" layoutX="94.0" layoutY="409.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables">
          <columns>
