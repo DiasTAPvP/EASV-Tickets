@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -24,16 +25,16 @@
          </image>
       </ImageView>
       <TextField fx:id="newEventName" alignment="BOTTOM_CENTER" layoutX="192.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Event Name" />
-      <TextField fx:id="newEventLocation" alignment="BOTTOM_CENTER" layoutX="191.0" layoutY="161.0" prefHeight="25.0" prefWidth="190.0" promptText="Location of the Event" />
+      <TextField fx:id="newEventLocation" alignment="BOTTOM_CENTER" layoutX="192.0" layoutY="194.0" prefHeight="25.0" prefWidth="190.0" promptText="Location of the Event" />
       <Text layoutX="255.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="62.162109375">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <TextField fx:id="newTotalTickets" alignment="BOTTOM_CENTER" layoutX="192.0" layoutY="198.0" prefHeight="25.0" prefWidth="190.0" promptText="Total Tickets" />
+      <TextField fx:id="newTotalTickets" alignment="BOTTOM_CENTER" layoutX="193.0" layoutY="231.0" prefHeight="25.0" prefWidth="190.0" promptText="Total Tickets" />
       <TextArea fx:id="newEventNotes" layoutX="118.0" layoutY="385.0" prefHeight="274.0" prefWidth="338.0" styleClass="tables" stylesheets="@style.css" wrapText="true" />
       <DatePicker fx:id="newEventDate" layoutX="192.0" layoutY="125.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="190.0" promptText="       Date For The event" />
-      <Label fx:id="infoTextAdmin" layoutX="759.0" layoutY="44.0" text="Event">
+      <Label fx:id="infoTextAdmin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="44.0" prefHeight="38.0" prefWidth="400.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
@@ -43,15 +44,17 @@
             <Image url="@images/save_icon.png" />
          </image>
       </ImageView>
-      <ComboBox layoutX="192.0" layoutY="233.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="190.0" promptText="                Ticket Type">
+      <ComboBox layoutX="193.0" layoutY="266.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="190.0" promptText="                Ticket Type">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <CheckBox layoutX="222.0" layoutY="266.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Free Tickets">
+      <CheckBox layoutX="223.0" layoutY="299.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Free Tickets">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
+      <Spinner fx:id="hourSpinner" editable="true" layoutX="193.0" layoutY="160.0" prefHeight="25.0" prefWidth="85.0" />
+      <Spinner fx:id="minuteSpinner" editable="true" layoutX="297.0" layoutY="160.0" prefHeight="25.0" prefWidth="85.0" />
    </children>
 </AnchorPane>

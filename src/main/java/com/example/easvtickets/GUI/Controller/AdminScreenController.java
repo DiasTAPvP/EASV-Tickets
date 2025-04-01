@@ -6,6 +6,8 @@ import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.BLL.UserManager;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import com.example.easvtickets.DAL.DAO.UserDAO;
+import com.example.easvtickets.GUI.Model.EventModel;
+import com.example.easvtickets.GUI.Model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +43,10 @@ public class AdminScreenController {
 
     private EventDAO eventDAO;
     private UserDAO userDAO;
+    private EventModel eventModel;
+    private UserModel userModel;
+    private Events selectedEvent;
+    private Users selectedUser;
 
     public AdminScreenController() throws IOException {
         this.eventDAO = new EventDAO();
@@ -104,7 +110,7 @@ public class AdminScreenController {
 
     private void displayEventDetails(Events event) {
         StringBuilder details = new StringBuilder();
-        details.append("Event Name: ").append(event.getEventName()).append("\n");
+        details.append("Event: ").append(event.getEventName()).append("\n");
         details.append("Description: ").append(event.getDescription()).append("\n");
         details.append("Date: ").append(event.getEventDate()).append("\n");
         details.append("Location: ").append(event.getLocation()).append("\n");
@@ -120,20 +126,21 @@ public class AdminScreenController {
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the event or coordinator?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
         if (answer == JOptionPane.YES_OPTION) {
-            Events selectedEvent = (Events) eventTableAdmin.getSelectionModel().getSelectedItem();
-            Users selectedUser = (Users) userTableAdmin.getSelectionModel().getSelectedItem();
+            Events selectedEvent = eventTableAdmin.getSelectionModel().getSelectedItem();
+            Users selectedUser = userTableAdmin.getSelectionModel().getSelectedItem();
 
             if (selectedEvent != null) {
-                eventDAO.deleteEvent(selectedEvent);
+                eventModel.deleteEvents(selectedEvent);
                 eventTableAdmin.getItems().remove(selectedEvent);
                 System.out.println("Event deleted succesfully.");
 
             } else if (selectedUser != null) {
-                userDAO.deleteUser(selectedUser);
+                userModel.deleteUsers(selectedUser);
                 userTableAdmin.getItems().remove(selectedUser);
                 System.out.println("User deleted succesfully.");
 
             } else {
+                JOptionPane.showMessageDialog(null, "No event or coordinator selected. Please select an event to delete.", "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println("No event or user selected.");
 
             }

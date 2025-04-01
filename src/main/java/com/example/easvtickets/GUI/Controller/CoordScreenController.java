@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.example.easvtickets.GUI.Controller.EventWindowController;
 import javafx.event.ActionEvent;
 
 import javax.swing.*;
@@ -34,7 +33,7 @@ public class CoordScreenController {
     private Button createEventButton;
     @FXML TableView<Events> personalEventsCoord;
     @FXML
-    private TableView<Events> allEventsCoord;
+    private TableView<Events> coordEventTable;
     @FXML
     private TableColumn<Events, Integer> eventIdColumn;
     @FXML
@@ -100,7 +99,7 @@ public class CoordScreenController {
         Parent root = loader.load();
 
 
-        Events selectedEvent = allEventsCoord.getSelectionModel().getSelectedItem();
+        Events selectedEvent = coordEventTable.getSelectionModel().getSelectedItem();
         System.out.println("Selected from table: " + selectedEvent);
         System.out.println("Row selected in table? " + personalEventsCoord.getSelectionModel().isEmpty());
         //Controller for new view
@@ -137,9 +136,29 @@ public class CoordScreenController {
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
 
+
+        eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
+            @Override
+            protected void updateItem(Timestamp eventDate, boolean empty) {
+                super.updateItem(eventDate, empty);
+                if (empty || eventDate == null) {
+                    setText(null);
+                } else {
+                    // Format as DD/MM/YYYY
+                    setText(String.format("%02d/%02d/%d %02d:%02d",
+                            eventDate.toLocalDateTime().getDayOfMonth(),
+                            eventDate.toLocalDateTime().getMonthValue(),
+                            eventDate.toLocalDateTime().getYear(),
+                            eventDate.toLocalDateTime().getHour(),
+                            eventDate.toLocalDateTime().getMinute()));
+                }
+            }
+        });
+
         loadEvents();
 
-        allEventsCoord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+        coordEventTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedEvent = (Events) newValue;
                 System.out.println("Selected Event: " + selectedEvent.getEventName());
@@ -147,13 +166,18 @@ public class CoordScreenController {
                 displayEventDetails(newValue);
             }
         });
+
+
+
+
+
     }
 
     private void loadEvents() {
         try {
             List<Events> eventsList = eventDAO.getAllEvents();
             ObservableList<Events> eventsObservableList = FXCollections.observableArrayList(eventsList);
-            allEventsCoord.setItems(eventsObservableList);
+            coordEventTable.setItems(eventsObservableList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,11 +202,11 @@ public class CoordScreenController {
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
         if (answer == JOptionPane.YES_OPTION) {
-            Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
+            Events selectedEvent = coordEventTable.getSelectionModel().getSelectedItem();
 
             if (selectedEvent != null) {
                 eventModel.deleteEvents(selectedEvent);
-                personalEventsCoord.getItems().remove(selectedEvent);
+                coordEventTable.getItems().remove(selectedEvent);
                 System.out.println("Event deleted succesfully.");
             } else {
                 JOptionPane.showMessageDialog(null, "No event selected. Please select an event to delete.", "Error", JOptionPane.ERROR_MESSAGE);

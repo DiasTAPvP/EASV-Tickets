@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -25,6 +26,8 @@ public class EventWindowController {
     @FXML private TextField newTotalTickets;
     @FXML private TextArea newEventNotes;
     @FXML private DatePicker newEventDate;
+    @FXML private Spinner<Integer> hourSpinner;
+    @FXML private Spinner<Integer> minuteSpinner;
 
     /**
      * Implement:
@@ -37,23 +40,72 @@ public class EventWindowController {
 
 
     @FXML
+    public void initialize() {
+        // Set up hour spinner (0-23)
+        SpinnerValueFactory<Integer> hourFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 12);
+        hourSpinner.setValueFactory(hourFactory);
+
+        // Set up minute spinner (0-59)
+        SpinnerValueFactory<Integer> minuteFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
+        minuteSpinner.setValueFactory(minuteFactory);
+
+        // Format spinner to always show two digits
+        hourSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer value) {
+                return String.format("%02d", value);
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                return Integer.parseInt(string);
+            }
+        });
+
+        minuteSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer value) {
+                return String.format("%02d", value);
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                return Integer.parseInt(string);
+            }
+        });
+    }
+
+
+    @FXML
     private void onCreate() {
         try {
             String eventName = newEventName.getText();
             String eventLocation = newEventLocation.getText();
             String eventDescription = newEventInfo.getText();
-            Timestamp eventDate = Timestamp.valueOf(newEventDate.getValue().atStartOfDay());
+
+            // Get date from DatePicker
+            java.time.LocalDate localDate = newEventDate.getValue();
+
+            // Get time from spinners
+            int hours = hourSpinner.getValue();
+            int minutes = minuteSpinner.getValue();
+
+            // Combine date and time
+            java.time.LocalDateTime dateTime = localDate.atTime(hours, minutes);
+            Timestamp eventDate = Timestamp.valueOf(dateTime);
+
             String eventNotes = newEventNotes.getText();
             int availableTickets = Integer.parseInt(newTotalTickets.getText());
             String optionalInformation = "";
 
-            Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation, eventNotes, availableTickets, optionalInformation);
+            Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
+                    eventNotes, availableTickets, optionalInformation);
             eventDAO.createEvent(newEvent);
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
-
             clearInputFields();
-
             Stage stage = (Stage) newEventSaveButton.getScene().getWindow();
             stage.close();
 
@@ -61,7 +113,6 @@ public class EventWindowController {
             showAlert(Alert.AlertType.ERROR, "Error", "Could not create event: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -80,6 +131,8 @@ public class EventWindowController {
         newEventNotes.clear();
         newTotalTickets.clear();
         newEventDate.setValue(null);
+        hourSpinner.getValueFactory().setValue(12);
+        minuteSpinner.getValueFactory().setValue(0);
     }
 
     public void setCoordScreenController(CoordScreenController coordScreenController) {this.setCoordScreenController = coordScreenController;}
@@ -97,9 +150,16 @@ public class EventWindowController {
             newEventName.setText(selectedEvent.getEventName());
             newEventLocation.setText(selectedEvent.getLocation());
             newEventInfo.setText(selectedEvent.getDescription());
+
+            // Set date in DatePicker
             newEventDate.setValue(selectedEvent.getEventDate().toLocalDateTime().toLocalDate());
+
+            // Set time in spinners
+            hourSpinner.getValueFactory().setValue(selectedEvent.getEventDate().toLocalDateTime().getHour());
+            minuteSpinner.getValueFactory().setValue(selectedEvent.getEventDate().toLocalDateTime().getMinute());
+
             newEventNotes.setText(selectedEvent.getNotes());
             newTotalTickets.setText(String.valueOf(selectedEvent.getAvailableTickets()));
         }
-        }
+    }
     }

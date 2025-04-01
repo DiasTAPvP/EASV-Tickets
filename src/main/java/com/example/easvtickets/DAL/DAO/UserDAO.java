@@ -44,7 +44,7 @@ public class UserDAO implements IUserDataAccess {
 
     @Override
     public void deleteUser(Users users) throws Exception {
-        String sql = "DELETE FROM dbo.Users WHERE loginid = ?";
+        String sql = "DELETE FROM Logins WHERE loginid = ?";
 
         try (Connection connection = dbConnector.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);

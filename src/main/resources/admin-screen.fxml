@@ -23,8 +23,8 @@
             <TableColumn fx:id="eventDateColumn" prefWidth="200.0" text="Date" />
          </columns>
       </TableView>
-      <Button fx:id="manageEntityButton" layoutX="481.0" layoutY="681.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
-      <Label fx:id="infoTextAdmin" layoutX="758.0" layoutY="44.0" text="Event">
+      <Button fx:id="manageEntityButton" layoutX="733.0" layoutY="668.0" mnemonicParsing="false" onAction="#onManageEntityButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" stylesheets="@style.css" />
+      <Label fx:id="infoTextAdmin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="590.0" layoutY="44.0" prefHeight="38.0" prefWidth="400.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
@@ -35,9 +35,15 @@
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="526.0" layoutY="682.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="778.0" layoutY="669.0">
          <image>
             <Image url="@images/edit_icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="adminDeleteButton" layoutX="247.0" layoutY="668.0" mnemonicParsing="false" onAction="#onAdminDeleteButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="292.0" layoutY="669.0">
+         <image>
+            <Image url="@images/delete_icon.png" />
          </image>
       </ImageView>
    </children>

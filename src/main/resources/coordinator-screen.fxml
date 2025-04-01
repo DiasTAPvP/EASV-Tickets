@@ -12,56 +12,62 @@
 
 <AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
-      <TableView fx:id="personalEventsCoord" layoutX="94.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css">
-        <columns>
-          <TableColumn prefWidth="400.0" text="People" />
-        </columns>
-      </TableView>
-      <TableView fx:id="allEventsCoord" layoutX="94.0" layoutY="409.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables">
+      <TableView fx:id="coordPeopleTable" layoutX="94.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css">
          <columns>
-            <TableColumn fx:id="eventNameColumn" prefWidth="200.0" text="Event" />
-            <TableColumn fx:id="eventDateColumn" prefWidth="200.0" text="Date" />
+            <TableColumn prefWidth="400.0" text="People" />
          </columns>
       </TableView>
-      <Button fx:id="manageEventButton" layoutX="610.0" layoutY="668.0" mnemonicParsing="false" onAction="#onManageButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <Button fx:id="createEventButton" layoutX="733.0" layoutY="668.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <Button fx:id="ticketsButton" layoutX="855.0" layoutY="668.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <TableView fx:id="coordEventTable" layoutX="94.0" layoutY="409.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables">
+         <columns>
+            <TableColumn fx:id="eventNameColumn" prefWidth="220.0" text="Event" />
+            <TableColumn fx:id="eventDateColumn" prefWidth="180.0" text="Date" />
+         </columns>
+      </TableView>
+      <Button fx:id="manageEventButton" layoutX="239.0" layoutY="668.0" mnemonicParsing="false" onAction="#onManageButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="createEventButton" layoutX="177.0" layoutY="668.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="ticketsButton" layoutX="300.0" layoutY="668.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
       <TextArea fx:id="currentEventInfoCoord" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" wrapText="true" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="infoLabelCoord" layoutX="759.0" layoutY="44.0" text="Event">
+      <Label fx:id="infoLabelCoord" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="44.0" prefHeight="38.0" prefWidth="400.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="901.0" layoutY="670.0">
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="314.0" layoutY="670.0">
          <image>
             <Image url="@images/ticket_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="655.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="252.0" layoutY="669.0">
          <image>
             <Image url="@images/mange_event_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="778.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="190.0" layoutY="669.0">
          <image>
             <Image url="@images/create_event_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="deleteEventButton" layoutX="237.0" layoutY="668.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="282.0" layoutY="669.0">
+      <Button fx:id="deleteEventButton" layoutX="361.0" layoutY="668.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="373.0" layoutY="669.0">
          <image>
             <Image url="@images/delete_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="coordLogout" layoutX="913.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="958.0" layoutY="15.0">
+      <Button fx:id="coordLogout" layoutX="983.0" layoutY="693.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="694.0">
          <image>
             <Image url="@images/logout_icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="PersonInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0">
+         <image>
+            <Image url="@images/personal_info_icon.png" />
          </image>
       </ImageView>
    </children>
