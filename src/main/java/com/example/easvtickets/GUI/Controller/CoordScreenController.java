@@ -3,16 +3,14 @@ package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +24,8 @@ import java.io.IOException;
 
 public class CoordScreenController {
 
+    @FXML
+    private Label infoLabelCoord;
     @FXML
     private Button ticketsButton;
     @FXML
@@ -54,8 +54,13 @@ public class CoordScreenController {
 
     private EventDAO eventDAO;
 
-    public CoordScreenController() throws IOException {
+    private EventModel eventModel;
+
+    private Events selectedEvent;
+
+    public CoordScreenController() throws Exception {
         this.eventDAO = new EventDAO();
+        this.eventModel = new EventModel();
     }
 
     private LoginController loginController;
@@ -136,6 +141,9 @@ public class CoordScreenController {
 
         allEventsCoord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                selectedEvent = (Events) newValue;
+                System.out.println("Selected Event: " + selectedEvent.getEventName());
+                infoLabelCoord.setText(selectedEvent.getEventName());
                 displayEventDetails(newValue);
             }
         });
@@ -153,7 +161,7 @@ public class CoordScreenController {
 
     private void displayEventDetails(Events event) {
         StringBuilder details = new StringBuilder();
-        details.append("Event Name: ").append(event.getEventName()).append("\n");
+        details.append("Event: ").append(event.getEventName()).append("\n");
         details.append("Description: ").append(event.getDescription()).append("\n");
         details.append("Date: ").append(event.getEventDate()).append("\n");
         details.append("Location: ").append(event.getLocation()).append("\n");
@@ -165,7 +173,7 @@ public class CoordScreenController {
     }
 
     @FXML
-    private void onCoordDeleteButtonPressed() throws Exception {
+    private void onDeleteButtonPressed() throws Exception {
 
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
@@ -173,15 +181,23 @@ public class CoordScreenController {
             Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
 
             if (selectedEvent != null) {
-                eventDAO.deleteEvent(selectedEvent);
+                eventModel.deleteEvents(selectedEvent);
                 personalEventsCoord.getItems().remove(selectedEvent);
                 System.out.println("Event deleted succesfully.");
             } else {
+                JOptionPane.showMessageDialog(null, "No event selected. Please select an event to delete.", "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println("No event selected.");
 
             }
         }
     }
+
+    public Events getSelectedEvent() {
+        return selectedEvent;
+    }
+
+
+
     @FXML
     private void onLogoutPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-form.fxml"));

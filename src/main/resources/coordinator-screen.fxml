@@ -32,7 +32,7 @@
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="infoTextAdmin" layoutX="759.0" layoutY="44.0" text="Event">
+      <Label fx:id="infoLabelCoord" layoutX="759.0" layoutY="44.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
@@ -52,7 +52,7 @@
             <Image url="@images/create_event_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="deleteEventButton" layoutX="237.0" layoutY="668.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <Button fx:id="deleteEventButton" layoutX="237.0" layoutY="668.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="282.0" layoutY="669.0">
          <image>
             <Image url="@images/delete_icon.png" />
