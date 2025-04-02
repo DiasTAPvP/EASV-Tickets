@@ -6,6 +6,7 @@ import com.example.easvtickets.DAL.IUserDataAccess;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements IUserDataAccess {
@@ -18,7 +19,29 @@ public class UserDAO implements IUserDataAccess {
 
     @Override
     public List<Users> getAllUsers() throws Exception {
-        return null;
+        ArrayList<Users> allUsers = new ArrayList<>();
+
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql = "SELECT * FROM Logins";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                int loginid = rs.getInt("loginid");
+                String username = rs.getString("username");
+                String passwordhash = rs.getString("passwordhash");
+                boolean isadmin = rs.getBoolean("isadmin");
+                Timestamp createdat = rs.getTimestamp("createdat");
+
+                Users user = new Users(loginid, username, passwordhash, isadmin, createdat);
+                allUsers.add(user);
+            }
+            return allUsers;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get users from database.", ex);
+        }
     }
 
     @Override

@@ -21,11 +21,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="109.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
-      <Button layoutX="374.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <Button layoutX="140.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button layoutX="405.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
       <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
       <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
-      <Button layoutX="239.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" styleClass="button-login" />
+      <Button layoutX="270.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
       <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" promptText="Amount" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>

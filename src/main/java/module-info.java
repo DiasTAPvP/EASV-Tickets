@@ -15,6 +15,10 @@ module com.example.easvtickets {
     requires com.microsoft.sqlserver.jdbc;
     requires java.naming;
     requires bcrypt;
+    requires com.google.zxing;
+    requires io;
+    requires kernel;
+    requires layout;
 
     opens com.example.easvtickets to javafx.fxml;
     exports com.example.easvtickets;

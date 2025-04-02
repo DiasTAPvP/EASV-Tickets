@@ -2,7 +2,9 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.DAL.DAO.UserDAO;
 import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,35 +25,25 @@ import java.io.IOException;
 
 public class CoordScreenController {
 
-    @FXML
-    private Label infoLabelCoord;
-    @FXML
-    private Button ticketsButton;
-    @FXML
-    private Button manageEventButton;
-    @FXML
-    private Button createEventButton;
+    @FXML private Label infoLabelCoord;
+    @FXML private Button ticketsButton;
+    @FXML private Button manageEventButton;
+    @FXML private Button createEventButton;
     @FXML TableView<Events> personalEventsCoord;
-    @FXML
-    private TableView<Events> coordEventTable;
-    @FXML
-    private TableColumn<Events, Integer> eventIdColumn;
-    @FXML
-    private TableColumn<Events, String> eventNameColumn;
-    @FXML
-    private TableColumn<Events, Timestamp> eventDateColumn;
-    @FXML
-    private TableColumn<Events, String> eventDescriptionColumn;
-    @FXML
-    private TableColumn<Events, String> eventLocationColumn;
-    @FXML
-    private TableColumn<Events, Integer> availableTicketsColumn;
-    @FXML
-    private TextArea currentEventInfoCoord;
-    @FXML
-    private Button coordLogout;
+    @FXML private TableView<Events> coordEventTable;
+    @FXML private TableColumn<Events, Integer> eventIdColumn;
+    @FXML private TableColumn<Events, String> eventNameColumn;
+    @FXML private TableColumn<Events, Timestamp> eventDateColumn;
+    @FXML private TableView<Users> coordPeopleTable;
+    @FXML private TableColumn<Users, String> coordPeopleColumn;
+    @FXML private TableColumn<Events, String> eventDescriptionColumn;
+    @FXML private TableColumn<Events, String> eventLocationColumn;
+    @FXML private TableColumn<Events, Integer> availableTicketsColumn;
+    @FXML private TextArea currentEventInfoCoord;
+    @FXML private Button coordLogout;
 
     private EventDAO eventDAO;
+    private UserDAO userDAO;
 
     private EventModel eventModel;
 
@@ -60,6 +52,7 @@ public class CoordScreenController {
     public CoordScreenController() throws Exception {
         this.eventDAO = new EventDAO();
         this.eventModel = new EventModel();
+        this.userDAO = new UserDAO();
     }
 
     private LoginController loginController;
@@ -101,7 +94,7 @@ public class CoordScreenController {
 
         Events selectedEvent = coordEventTable.getSelectionModel().getSelectedItem();
         System.out.println("Selected from table: " + selectedEvent);
-        System.out.println("Row selected in table? " + personalEventsCoord.getSelectionModel().isEmpty());
+        System.out.println("Row selected in table? " + coordEventTable.getSelectionModel().isEmpty());
         //Controller for new view
         EventWindowController eventController = loader.getController();
 
@@ -135,6 +128,7 @@ public class CoordScreenController {
     public void initialize() {
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+        coordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
 
         eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
@@ -156,6 +150,15 @@ public class CoordScreenController {
         });
 
         loadEvents();
+        loadUsers();
+
+        coordPeopleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Users selectedUser = (Users) newValue;
+                System.out.println("Selected User: " + selectedUser.getUsername());
+                infoLabelCoord.setText(selectedUser.getUsername());
+            }
+        });
 
 
         coordEventTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -171,6 +174,23 @@ public class CoordScreenController {
 
 
 
+    }
+
+    private void loadUsers() {
+        try {
+            List<Users> allUsers = userDAO.getAllUsers();
+
+            // Filter to only include non-admin users
+            List<Users> nonAdminUsers = allUsers.stream()
+                    .filter(user -> !user.getIsadmin())
+                    .toList();
+
+            ObservableList<Users> usersObservableList = FXCollections.observableArrayList(nonAdminUsers);
+            coordPeopleTable.setItems(usersObservableList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            infoLabelCoord.setText("Error loading users: " + e.getMessage());
+        }
     }
 
     private void loadEvents() {
@@ -218,6 +238,19 @@ public class CoordScreenController {
 
     public Events getSelectedEvent() {
         return selectedEvent;
+    }
+
+    @FXML
+    private void onPersonInfoButtonPressed(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/personal-info.fxml"));
+        Parent root = loader.load();
+
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Personal Information");
+        stage.show();
     }
 
 

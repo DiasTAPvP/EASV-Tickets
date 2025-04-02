@@ -22,14 +22,14 @@ public class CreateUserController {
     @FXML private CheckBox makeAdminCheck;
     
     private UserManager userManager;
-    private AdminPanelController adminPanelController;
+    private AdminScreenController adminScreenController;
 
     
     public CreateUserController() throws IOException {
         userManager = new UserManager();
     }
     
-    public void setAdminPanelController(AdminPanelController adminPanelController) {this.adminPanelController = adminPanelController;}
+    public void setAdminScreenController(AdminScreenController adminScreenController) {this.adminScreenController = adminScreenController;}
     
     /**Implement:
      * Error displays

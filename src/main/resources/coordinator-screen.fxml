@@ -14,7 +14,7 @@
    <children>
       <TableView fx:id="coordPeopleTable" layoutX="94.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css">
          <columns>
-            <TableColumn prefWidth="400.0" text="People" />
+            <TableColumn fx:id="coordPeopleColumn" prefWidth="400.0" text="Coordinators" />
          </columns>
       </TableView>
       <TableView fx:id="coordEventTable" layoutX="94.0" layoutY="409.0" prefHeight="250.0" prefWidth="400.0" styleClass="tables">
@@ -64,7 +64,7 @@
             <Image url="@images/logout_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="PersonInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="personInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" onAction="#onPersonInfoButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0">
          <image>
             <Image url="@images/personal_info_icon.png" />

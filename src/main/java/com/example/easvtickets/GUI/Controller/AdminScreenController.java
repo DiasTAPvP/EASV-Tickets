@@ -15,13 +15,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -36,10 +34,14 @@ public class AdminScreenController {
     @FXML private TableColumn<Events, Integer> eventIdColumn;
     @FXML private TableColumn<Events, String> eventNameColumn;
     @FXML private TableColumn<Events, Timestamp> eventDateColumn;
+    @FXML private TableColumn<Events, String> adminPeopleColumn;
     @FXML private TableColumn<Events, String> eventDescriptionColumn;
     @FXML private TableColumn<Events, String> eventLocationColumn;
     @FXML private TableColumn<Events, Integer> availableTicketsColumn;
     @FXML private TextArea entityInfoAdmin;
+    @FXML private Button adminLogout;
+    @FXML private Button createUserButton;
+    @FXML private Label infoTextAdmin;
 
     private EventDAO eventDAO;
     private UserDAO userDAO;
@@ -67,7 +69,7 @@ public class AdminScreenController {
 
     @FXML
     private void onManageEntityButtonPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-panel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin- .fxml"));
         Parent root = loader.load();
 
         AdminPanelController adminPanelController = loader.getController();
@@ -81,13 +83,38 @@ public class AdminScreenController {
     }
 
     @FXML
+    private void onCreateUserButtonPressed() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-user.fxml"));
+        Parent root = loader.load();
+
+        CreateUserController createUserController = loader.getController();
+        createUserController.setAdminScreenController(this);
+
+        Stage stage = new Stage();
+        stage.setTitle("Create New Users");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    @FXML
     public void initialize() {
 
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+        adminPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
 
         loadEvents();
+        loadUsers();
+
+        userTableAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Users selectedUser = (Users) newValue;
+                System.out.println("Selected User: " + selectedUser.getUsername());
+                infoTextAdmin.setText(selectedUser.getUsername());
+            }
+        });
 
         eventTableAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -96,6 +123,16 @@ public class AdminScreenController {
         });
 
 
+    }
+
+    private void loadUsers() {
+        try {
+            List<Users> usersList = userDAO.getAllUsers();
+            ObservableList<Users> usersObservableList = FXCollections.observableArrayList(usersList);
+            userTableAdmin.setItems(usersObservableList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadEvents() {
@@ -147,4 +184,28 @@ public class AdminScreenController {
         }
     }
 
+    @FXML
+    private void onCreateUserButtonPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-user.fxml"));
+        Parent root = loader.load();
+
+        Stage stage =  new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Create User");
+        stage.show();
+    }
+    @FXML
+    private void onAdminLogoutPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-form.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login");
+        stage.show();
+
+        //Closes current window
+        Stage currentStage = (Stage) adminLogout.getScene().getWindow();
+        currentStage.close();
+    }
 }
