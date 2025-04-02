@@ -26,17 +26,17 @@
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="250.0" layoutY="128.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="250.0" layoutY="128.0" mouseTransparent="true">
          <image>
             <Image url="@images/save_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="225.0" layoutY="128.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="225.0" layoutY="128.0" mouseTransparent="true">
          <image>
             <Image url="@images/send_icon2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="351.0" layoutY="97.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="351.0" layoutY="97.0" mouseTransparent="true">
          <image>
             <Image url="@images/generate_pw_icon.png" />
          </image>

@@ -37,35 +37,35 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="314.0" layoutY="670.0">
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="314.0" layoutY="670.0" mouseTransparent="true">
          <image>
             <Image url="@images/ticket_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="252.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="252.0" layoutY="669.0" mouseTransparent="true">
          <image>
             <Image url="@images/mange_event_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="190.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="190.0" layoutY="669.0" mouseTransparent="true">
          <image>
             <Image url="@images/create_event_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="deleteEventButton" layoutX="361.0" layoutY="668.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="373.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="373.0" layoutY="669.0" mouseTransparent="true">
          <image>
             <Image url="@images/delete_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="coordLogout" layoutX="983.0" layoutY="693.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="694.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="694.0" mouseTransparent="true">
          <image>
             <Image url="@images/logout_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="personInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" onAction="#onPersonInfoButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0" mouseTransparent="true">
          <image>
             <Image url="@images/personal_info_icon.png" />
          </image>

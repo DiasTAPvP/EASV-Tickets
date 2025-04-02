@@ -25,7 +25,7 @@
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="238.0" layoutY="132.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="238.0" layoutY="132.0" mouseTransparent="true">
          <image>
             <Image url="@images/login_icon.png" />
          </image>

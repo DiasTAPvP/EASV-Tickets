@@ -50,9 +50,10 @@ public class AdminScreenController {
     private Events selectedEvent;
     private Users selectedUser;
 
-    public AdminScreenController() throws IOException {
+    public AdminScreenController() throws Exception {
         this.eventDAO = new EventDAO();
         this.userDAO = new UserDAO();
+        this.eventModel = new EventModel();
     }
 
     private LoginController loginController;
@@ -194,6 +195,21 @@ public class AdminScreenController {
         stage.setTitle("Create User");
         stage.show();
     }
+
+    @FXML
+    private void onAdminPersonInfoButtonPressed(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/personal-info.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Personal Information");
+        stage.show();
+    }
+
+
+
     @FXML
     private void onAdminLogoutPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-form.fxml"));

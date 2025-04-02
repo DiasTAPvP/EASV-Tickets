@@ -35,31 +35,31 @@
             <Image url="@images/easv.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="863.0" layoutY="695.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="863.0" layoutY="695.0" mouseTransparent="true">
          <image>
             <Image url="@images/edit_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="adminDeleteButton" layoutX="294.0" layoutY="668.0" mnemonicParsing="false" onAction="#onAdminDeleteButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="307.0" layoutY="669.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="307.0" layoutY="669.0" mouseTransparent="true">
          <image>
             <Image url="@images/delete_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="adminLogout" layoutX="983.0" layoutY="693.0" mnemonicParsing="false" onAction="#onAdminLogoutPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="695.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="695.0" mouseTransparent="true">
          <image>
             <Image url="@images/logout_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="AdminPersonInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0">
+      <Button fx:id="AdminPersonInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" onAction="#onAdminPersonInfoButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0" mouseTransparent="true">
          <image>
             <Image url="@images/personal_info_icon.png" />
          </image>
       </ImageView>
       <Button fx:id="createUserButton" layoutX="790.0" layoutY="693.0" mnemonicParsing="false" onAction="#onCreateUserButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" stylesheets="@style.css" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="803.0" layoutY="695.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="803.0" layoutY="695.0" mouseTransparent="true">
          <image>
             <Image url="@images/create_user_icon.png" />
          </image>
