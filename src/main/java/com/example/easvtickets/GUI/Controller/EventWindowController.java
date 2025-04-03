@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 
 public class EventWindowController {
 
-    private CoordScreenController setCoordScreenController;
+    private CoordScreenController coordScreenController;
     private EventDAO eventDAO;
     private EventModel eventModel;
 
@@ -22,6 +22,7 @@ public class EventWindowController {
         this.eventDAO = new EventDAO();
         this.eventModel = new EventModel();
     }
+
     @FXML private Button newEventSaveButton;
     @FXML private TextArea newEventInfo;
     @FXML private TextField newEventName;
@@ -115,6 +116,13 @@ public class EventWindowController {
 
                 eventModel.updateEvent(selectedEvent);
 
+
+                //Force manual refresh after update
+                if (coordScreenController != null) {
+                    System.out.println("Manual refresh after update");
+                    coordScreenController.forceRefresh();
+                }
+
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Event updated successfully!");
             }
             else {
@@ -127,6 +135,13 @@ public class EventWindowController {
             }
 
             clearInputFields();
+
+
+            //Refresh the event table in the coordinator screen
+            if (coordScreenController != null) {
+                coordScreenController.forceRefresh();
+            }
+
             Stage stage = (Stage) newEventSaveButton.getScene().getWindow();
             stage.close();
 
@@ -156,7 +171,7 @@ public class EventWindowController {
         minuteSpinner.getValueFactory().setValue(0);
     }
 
-    public void setCoordScreenController(CoordScreenController coordScreenController) {this.setCoordScreenController = coordScreenController;}
+    public void setCoordScreenController(CoordScreenController coordScreenController) {this.coordScreenController = coordScreenController;}
 
     private Events selectedEvent;
 

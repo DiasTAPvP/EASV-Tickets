@@ -53,9 +53,7 @@ public class EventModel {
         eventManager.updateEvent(selectedEvent);
 
         //Update the ObservableList
-        int index = eventsToBeViewed.indexOf(selectedEvent);
-        if (index != -1) {
-            eventsToBeViewed.set(index, selectedEvent);
-        }
+        refreshEvents();
+
     }
 }

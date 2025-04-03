@@ -6,6 +6,7 @@ import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import com.example.easvtickets.DAL.DAO.UserDAO;
 import com.example.easvtickets.GUI.Model.EventModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -184,10 +185,8 @@ public class CoordScreenController {
     public void tableRefresh() {
         System.out.println("Refreshing tables");
         try {
-            eventModel.refreshEvents();
-            ObservableList<Events> currentEvents = eventModel.getObservableList();
-            coordEventTable.setItems(currentEvents);
-            System.out.println("Number of events in ObservableList: " + currentEvents.size());
+            loadEvents();
+            System.out.println("Events table refreshed succesfully");
         } catch (Exception e) {
             displayError(e);
             e.printStackTrace();
@@ -213,9 +212,8 @@ public class CoordScreenController {
 
     private void loadEvents() {
         try {
-            List<Events> eventsList = eventDAO.getAllEvents();
-            ObservableList<Events> eventsObservableList = FXCollections.observableArrayList(eventsList);
-            coordEventTable.setItems(eventsObservableList);
+            eventModel.refreshEvents();
+            coordEventTable.setItems(eventModel.getObservableList());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -232,6 +230,20 @@ public class CoordScreenController {
         details.append("Optional Information: ").append(event.getOptionalInformation()).append("\n");
 
         currentEventInfoCoord.setText(details.toString());
+    }
+
+    public void forceRefresh() {
+        Platform.runLater(() -> {
+            try {
+                // Load fresh data
+                eventModel.refreshEvents();
+                coordEventTable.setItems(eventModel.getObservableList());
+                coordEventTable.refresh();
+                System.out.println("TableView refreshed with " + eventModel.getObservableList().size() + " items");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
