@@ -245,6 +245,8 @@ public class CoordScreenController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/personal-info.fxml"));
         Parent root = loader.load();
+        PersonalInfoController personalInfoController = loader.getController();
+        personalInfoController.setUser(currentUser);
 
 
         Stage stage = new Stage();
@@ -268,5 +270,9 @@ public class CoordScreenController {
         //Closes current window
         Stage currentStage = (Stage) coordLogout.getScene().getWindow();
         currentStage.close();
+    }
+    private Users currentUser;
+    public void setUser(Users user) {
+        currentUser = user;
     }
 }

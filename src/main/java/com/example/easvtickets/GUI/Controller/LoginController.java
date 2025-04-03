@@ -142,9 +142,11 @@ public class LoginController implements Initializable {
             if (user.getIsadmin()) {
                 AdminScreenController admincontroller = loader.getController();
                 admincontroller.setLoginController(this);
+                admincontroller.setUser(user);
             } else {
                 CoordScreenController coordcontroller = loader.getController();
                 coordcontroller.setLoginController(this);
+                coordcontroller.setUser(user);
             }
 
             Stage loginStage = (Stage) coordLogin.getScene().getWindow();
