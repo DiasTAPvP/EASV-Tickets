@@ -86,7 +86,7 @@ public class EventDAO implements IEventDataAccess {
 
     @Override
     public void deleteEvent(Events event) throws Exception {
-        String sql = "DELETE FROM dbo.Users WHERE eventid = ?";
+        String sql = "DELETE FROM Events WHERE eventid = ?";
 
         try (Connection connection = dbConnector.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);

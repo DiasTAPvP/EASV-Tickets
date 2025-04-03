@@ -2,21 +2,21 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.DAL.DAO.UserDAO;
+import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 import javax.swing.*;
 import java.sql.Timestamp;
@@ -25,34 +25,34 @@ import java.io.IOException;
 
 public class CoordScreenController {
 
-    @FXML
-    private Button ticketsButton;
-    @FXML
-    private Button manageEventButton;
-    @FXML
-    private Button createEventButton;
+    @FXML private Label infoLabelCoord;
+    @FXML private Button ticketsButton;
+    @FXML private Button manageEventButton;
+    @FXML private Button createEventButton;
     @FXML TableView<Events> personalEventsCoord;
-    @FXML
-    private TableView<Events> allEventsCoord;
-    @FXML
-    private TableColumn<Events, Integer> eventIdColumn;
-    @FXML
-    private TableColumn<Events, String> eventNameColumn;
-    @FXML
-    private TableColumn<Events, Timestamp> eventDateColumn;
-    @FXML
-    private TableColumn<Events, String> eventDescriptionColumn;
-    @FXML
-    private TableColumn<Events, String> eventLocationColumn;
-    @FXML
-    private TableColumn<Events, Integer> availableTicketsColumn;
-    @FXML
-    private TextArea currentEventInfoCoord;
+    @FXML private TableView<Events> coordEventTable;
+    @FXML private TableColumn<Events, Integer> eventIdColumn;
+    @FXML private TableColumn<Events, String> eventNameColumn;
+    @FXML private TableColumn<Events, Timestamp> eventDateColumn;
+    @FXML private TableView<Users> availableCoordPeopleTable;
+    @FXML private TableColumn<Users, String> availableCoordPeopleColumn;
+    @FXML private TableColumn<Events, String> eventDescriptionColumn;
+    @FXML private TableColumn<Events, String> eventLocationColumn;
+    @FXML private TableColumn<Events, Integer> availableTicketsColumn;
+    @FXML private TextArea currentEventInfoCoord;
+    @FXML private Button coordLogout;
 
     private EventDAO eventDAO;
+    private UserDAO userDAO;
 
-    public CoordScreenController() throws IOException {
+    private EventModel eventModel;
+
+    private Events selectedEvent;
+
+    public CoordScreenController() throws Exception {
         this.eventDAO = new EventDAO();
+        this.eventModel = new EventModel();
+        this.userDAO = new UserDAO();
     }
 
     private LoginController loginController;
@@ -88,12 +88,18 @@ public class CoordScreenController {
 
     @FXML
     private void onManageButtonPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/coordinator-panel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-event-view.fxml"));
         Parent root = loader.load();
 
-        //Get the controller and set the controller
-        CoordPanelController eventController = loader.getController();
-        eventController.setCoordScreenController(this);
+
+        Events selectedEvent = coordEventTable.getSelectionModel().getSelectedItem();
+        System.out.println("Selected from table: " + selectedEvent);
+        System.out.println("Row selected in table? " + coordEventTable.getSelectionModel().isEmpty());
+        //Controller for new view
+        EventWindowController eventController = loader.getController();
+
+        //Passes selected event to edit
+        eventController.setSelectedEvent(selectedEvent);
 
         Stage stage = new Stage();
         stage.setTitle("Manage Events");
@@ -108,8 +114,8 @@ public class CoordScreenController {
         Parent root = loader.load();
 
         //Get the controller and set the controller
-        NewEventController newEventController = loader.getController();
-        newEventController.setCoordScreenController(this);
+        EventWindowController eventWindowController = loader.getController();
+        eventWindowController.setCoordScreenController(this);
 
         Stage stage = new Stage();
         stage.setTitle("Create Event");
@@ -122,21 +128,76 @@ public class CoordScreenController {
     public void initialize() {
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+        availableCoordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+
+        eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
+            @Override
+            protected void updateItem(Timestamp eventDate, boolean empty) {
+                super.updateItem(eventDate, empty);
+                if (empty || eventDate == null) {
+                    setText(null);
+                } else {
+                    // Format as DD/MM/YYYY
+                    setText(String.format("%02d/%02d/%d %02d:%02d",
+                            eventDate.toLocalDateTime().getDayOfMonth(),
+                            eventDate.toLocalDateTime().getMonthValue(),
+                            eventDate.toLocalDateTime().getYear(),
+                            eventDate.toLocalDateTime().getHour(),
+                            eventDate.toLocalDateTime().getMinute()));
+                }
+            }
+        });
 
         loadEvents();
+        loadUsers();
 
-        allEventsCoord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        availableCoordPeopleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                Users selectedUser = (Users) newValue;
+                System.out.println("Selected User: " + selectedUser.getUsername());
+                infoLabelCoord.setText(selectedUser.getUsername());
+            }
+        });
+
+
+        coordEventTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedEvent = (Events) newValue;
+                System.out.println("Selected Event: " + selectedEvent.getEventName());
+                infoLabelCoord.setText(selectedEvent.getEventName());
                 displayEventDetails(newValue);
             }
         });
+
+
+
+
+
+    }
+
+    private void loadUsers() {
+        try {
+            List<Users> allUsers = userDAO.getAllUsers();
+
+            // Filter to only include non-admin users
+            List<Users> nonAdminUsers = allUsers.stream()
+                    .filter(user -> !user.getIsadmin())
+                    .toList();
+
+            ObservableList<Users> usersObservableList = FXCollections.observableArrayList(nonAdminUsers);
+            availableCoordPeopleTable.setItems(usersObservableList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            infoLabelCoord.setText("Error loading users: " + e.getMessage());
+        }
     }
 
     private void loadEvents() {
         try {
             List<Events> eventsList = eventDAO.getAllEvents();
             ObservableList<Events> eventsObservableList = FXCollections.observableArrayList(eventsList);
-            allEventsCoord.setItems(eventsObservableList);
+            coordEventTable.setItems(eventsObservableList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,7 +205,7 @@ public class CoordScreenController {
 
     private void displayEventDetails(Events event) {
         StringBuilder details = new StringBuilder();
-        details.append("Event Name: ").append(event.getEventName()).append("\n");
+        details.append("Event: ").append(event.getEventName()).append("\n");
         details.append("Description: ").append(event.getDescription()).append("\n");
         details.append("Date: ").append(event.getEventDate()).append("\n");
         details.append("Location: ").append(event.getLocation()).append("\n");
@@ -156,21 +217,56 @@ public class CoordScreenController {
     }
 
     @FXML
-    private void onCoordDeleteButtonPressed() throws Exception {
+    private void onDeleteButtonPressed() throws Exception {
 
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
         if (answer == JOptionPane.YES_OPTION) {
-            Events selectedEvent = (Events) personalEventsCoord.getSelectionModel().getSelectedItem();
+            Events selectedEvent = coordEventTable.getSelectionModel().getSelectedItem();
 
             if (selectedEvent != null) {
-                eventDAO.deleteEvent(selectedEvent);
-                personalEventsCoord.getItems().remove(selectedEvent);
+                eventModel.deleteEvents(selectedEvent);
+                coordEventTable.getItems().remove(selectedEvent);
                 System.out.println("Event deleted succesfully.");
             } else {
+                JOptionPane.showMessageDialog(null, "No event selected. Please select an event to delete.", "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println("No event selected.");
 
             }
         }
+    }
+
+    public Events getSelectedEvent() {
+        return selectedEvent;
+    }
+
+    @FXML
+    private void onPersonInfoButtonPressed(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/personal-info.fxml"));
+        Parent root = loader.load();
+
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Personal Information");
+        stage.show();
+    }
+
+
+
+    @FXML
+    private void onLogoutPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-form.fxml"));
+        Parent root = loader.load();
+
+        Stage stage= new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login");
+        stage.show();
+
+        //Closes current window
+        Stage currentStage = (Stage) coordLogout.getScene().getWindow();
+        currentStage.close();
     }
 }

@@ -25,7 +25,7 @@ public class AdminPanelController {
      * **/
 
 
-    @FXML
+    /*@FXML
     private void onCreateUserButtonPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-user.fxml"));
         Parent root = loader.load();
@@ -38,7 +38,7 @@ public class AdminPanelController {
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-    }
+    }*/
 
     @FXML
     private void onAdminDeleteButtonPressed() throws Exception {
