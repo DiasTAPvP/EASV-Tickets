@@ -44,7 +44,7 @@ public class CreateUserController {
     public void onCreateUser() throws Exception {
         String username = newUserName.getText();
         String password = newUserPassword.getText();
-        boolean isAdmin = makeAdminCheck.isSelected();
+        boolean isAdmin = false;
         String hashedPassword = BCryptUtil.hashPassword(password);
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
         

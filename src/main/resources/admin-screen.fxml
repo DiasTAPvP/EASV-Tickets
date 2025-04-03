@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
+<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
    <children>
       <TableView fx:id="userTableAdmin" layoutX="119.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0">
          <columns>
@@ -29,7 +29,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <TextArea fx:id="entityInfoAdmin" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" />
+      <TextArea fx:id="entityInfoAdmin" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" wrapText="true" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />

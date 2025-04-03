@@ -54,6 +54,7 @@ public class AdminScreenController {
         this.eventDAO = new EventDAO();
         this.userDAO = new UserDAO();
         this.eventModel = new EventModel();
+        this.userModel = new UserModel();
     }
 
     private LoginController loginController;

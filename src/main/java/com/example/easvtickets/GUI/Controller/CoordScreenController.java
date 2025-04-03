@@ -34,8 +34,8 @@ public class CoordScreenController {
     @FXML private TableColumn<Events, Integer> eventIdColumn;
     @FXML private TableColumn<Events, String> eventNameColumn;
     @FXML private TableColumn<Events, Timestamp> eventDateColumn;
-    @FXML private TableView<Users> coordPeopleTable;
-    @FXML private TableColumn<Users, String> coordPeopleColumn;
+    @FXML private TableView<Users> availableCoordPeopleTable;
+    @FXML private TableColumn<Users, String> availableCoordPeopleColumn;
     @FXML private TableColumn<Events, String> eventDescriptionColumn;
     @FXML private TableColumn<Events, String> eventLocationColumn;
     @FXML private TableColumn<Events, Integer> availableTicketsColumn;
@@ -128,7 +128,7 @@ public class CoordScreenController {
     public void initialize() {
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
-        coordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        availableCoordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
 
         eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
@@ -152,7 +152,7 @@ public class CoordScreenController {
         loadEvents();
         loadUsers();
 
-        coordPeopleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        availableCoordPeopleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 Users selectedUser = (Users) newValue;
                 System.out.println("Selected User: " + selectedUser.getUsername());
@@ -186,7 +186,7 @@ public class CoordScreenController {
                     .toList();
 
             ObservableList<Users> usersObservableList = FXCollections.observableArrayList(nonAdminUsers);
-            coordPeopleTable.setItems(usersObservableList);
+            availableCoordPeopleTable.setItems(usersObservableList);
         } catch (Exception e) {
             e.printStackTrace();
             infoLabelCoord.setText("Error loading users: " + e.getMessage());
