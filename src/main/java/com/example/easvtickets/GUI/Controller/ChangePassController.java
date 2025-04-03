@@ -1,5 +1,6 @@
 package com.example.easvtickets.GUI.Controller;
 
+import com.example.easvtickets.BE.Users;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
@@ -26,5 +27,9 @@ public class ChangePassController {
         String confirmPass = confirmPassword.getText();
 
     }
-
+    private Users currentUser;
+    public void setUser(Users user) {
+        currentUser = user;
+        passSaveButton.setText(user.getUsername());
+    }
 }

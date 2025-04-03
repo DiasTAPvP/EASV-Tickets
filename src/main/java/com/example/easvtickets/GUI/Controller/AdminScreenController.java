@@ -225,6 +225,8 @@ public class AdminScreenController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/personal-info.fxml"));
         Parent root = loader.load();
+        PersonalInfoController personalInfoController = loader.getController();
+        personalInfoController.setUser(currentUser);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -247,5 +249,9 @@ public class AdminScreenController {
         //Closes current window
         Stage currentStage = (Stage) adminLogout.getScene().getWindow();
         currentStage.close();
+    }
+    private Users currentUser;
+    public void setUser(Users user) {
+        currentUser = user;
     }
 }

@@ -2,7 +2,6 @@ package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
-import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -14,13 +13,11 @@ import java.sql.Timestamp;
 
 public class EventWindowController {
 
-    private CoordScreenController coordScreenController;
+    private CoordScreenController setCoordScreenController;
     private EventDAO eventDAO;
-    private EventModel eventModel;
 
-    public EventWindowController() throws Exception {
+    public EventWindowController() throws IOException {
         this.eventDAO = new EventDAO();
-        this.eventModel = new EventModel();
     }
     @FXML private Button newEventSaveButton;
     @FXML private TextArea newEventInfo;
@@ -103,21 +100,30 @@ public class EventWindowController {
             int availableTickets = Integer.parseInt(newTotalTickets.getText());
             String optionalInformation = "";
 
-            Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
-                    eventNotes, availableTickets, optionalInformation);
+            if (selectedEvent != null) {
+                // EDIT mode
+                selectedEvent.setEventName(eventName);
+                selectedEvent.setLocation(eventLocation);
+                selectedEvent.setDescription(eventDescription);
+                selectedEvent.setEventDate(eventDate);
+                selectedEvent.setNotes(eventNotes);
+                selectedEvent.setAvailableTickets(availableTickets);
+                selectedEvent.setOptionalInformation(optionalInformation);
 
-            eventModel.createEvent(newEvent);
+                eventDAO.updateEvent(selectedEvent);
 
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
-            clearInputFields();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Event updated successfully!");
+            }
+            else {
+                //Create Mode
 
-            //Refresh the event table in the coordinator screen
-            if (coordScreenController != null) {
-                coordScreenController.tableRefresh();
+                Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
+                        eventNotes, availableTickets, optionalInformation);
+                eventDAO.createEvent(newEvent);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
             }
 
-
-            //Close the window after saving
+            clearInputFields();
             Stage stage = (Stage) newEventSaveButton.getScene().getWindow();
             stage.close();
 
@@ -147,7 +153,7 @@ public class EventWindowController {
         minuteSpinner.getValueFactory().setValue(0);
     }
 
-    public void setCoordScreenController(CoordScreenController coordScreenController) {this.coordScreenController = coordScreenController;}
+    public void setCoordScreenController(CoordScreenController coordScreenController) {this.setCoordScreenController = coordScreenController;}
 
     private Events selectedEvent;
 

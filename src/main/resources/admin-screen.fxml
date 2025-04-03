@@ -10,13 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
+<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.AdminScreenController">
    <children>
-      <TableView fx:id="userTableAdmin" layoutX="119.0" layoutY="89.0" prefHeight="250.0" prefWidth="400.0">
-         <columns>
-            <TableColumn fx:id="adminPeopleColumn" prefWidth="400.0" text="Coordinators" />
-         </columns>
-      </TableView>
       <TableView fx:id="eventTableAdmin" layoutX="119.0" layoutY="409.0" prefHeight="250.0" prefWidth="400.0">
          <columns>
             <TableColumn fx:id="eventNameColumn" prefWidth="200.0" text="Event" />
@@ -64,5 +59,15 @@
             <Image url="@images/create_user_icon.png" />
          </image>
       </ImageView>
+      <TableView fx:id="userTableAdmin" layoutX="119.0" layoutY="89.0" prefHeight="250.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css">
+         <columns>
+            <TableColumn fx:id="adminPeopleColumn" prefWidth="198.0" text="Available Coordinators" />
+         </columns>
+      </TableView>
+      <TableView fx:id="assignedAdminCoordPeopleTable" layoutX="319.0" layoutY="89.0" prefHeight="250.0" prefWidth="200.0" styleClass="tables" stylesheets="@style.css">
+         <columns>
+            <TableColumn fx:id="assignedAdminCoordPeopleColumn" prefWidth="198.0" text="Assigned Coordinators" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
