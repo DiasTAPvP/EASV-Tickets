@@ -100,11 +100,29 @@ public class EventWindowController {
             int availableTickets = Integer.parseInt(newTotalTickets.getText());
             String optionalInformation = "";
 
-            Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
-                    eventNotes, availableTickets, optionalInformation);
-            eventDAO.createEvent(newEvent);
+            if (selectedEvent != null) {
+                // EDIT mode
+                selectedEvent.setEventName(eventName);
+                selectedEvent.setLocation(eventLocation);
+                selectedEvent.setDescription(eventDescription);
+                selectedEvent.setEventDate(eventDate);
+                selectedEvent.setNotes(eventNotes);
+                selectedEvent.setAvailableTickets(availableTickets);
+                selectedEvent.setOptionalInformation(optionalInformation);
 
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
+                eventDAO.updateEvent(selectedEvent);
+
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Event updated successfully!");
+            }
+            else {
+                //Create Mode
+
+                Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
+                        eventNotes, availableTickets, optionalInformation);
+                eventDAO.createEvent(newEvent);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
+            }
+
             clearInputFields();
             Stage stage = (Stage) newEventSaveButton.getScene().getWindow();
             stage.close();
