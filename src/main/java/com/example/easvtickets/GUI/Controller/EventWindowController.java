@@ -2,6 +2,7 @@ package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -13,11 +14,13 @@ import java.sql.Timestamp;
 
 public class EventWindowController {
 
-    private CoordScreenController setCoordScreenController;
+    private CoordScreenController coordScreenController;
     private EventDAO eventDAO;
+    private EventModel eventModel;
 
-    public EventWindowController() throws IOException {
+    public EventWindowController() throws Exception {
         this.eventDAO = new EventDAO();
+        this.eventModel = new EventModel();
     }
     @FXML private Button newEventSaveButton;
     @FXML private TextArea newEventInfo;
@@ -102,10 +105,19 @@ public class EventWindowController {
 
             Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
                     eventNotes, availableTickets, optionalInformation);
-            eventDAO.createEvent(newEvent);
+
+            eventModel.createEvent(newEvent);
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
             clearInputFields();
+
+            //Refresh the event table in the coordinator screen
+            if (coordScreenController != null) {
+                coordScreenController.tableRefresh();
+            }
+
+
+            //Close the window after saving
             Stage stage = (Stage) newEventSaveButton.getScene().getWindow();
             stage.close();
 
@@ -135,7 +147,7 @@ public class EventWindowController {
         minuteSpinner.getValueFactory().setValue(0);
     }
 
-    public void setCoordScreenController(CoordScreenController coordScreenController) {this.setCoordScreenController = coordScreenController;}
+    public void setCoordScreenController(CoordScreenController coordScreenController) {this.coordScreenController = coordScreenController;}
 
     private Events selectedEvent;
 

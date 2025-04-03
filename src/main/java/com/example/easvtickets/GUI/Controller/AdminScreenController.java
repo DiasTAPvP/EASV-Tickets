@@ -69,6 +69,29 @@ public class AdminScreenController {
     * Selection/Listener capabilities
     **/
 
+    public void refreshUserTable() {
+        System.out.println("Table refreshed");
+        try {
+            userModel.refreshUsers();
+            ObservableList<Users> currentUsers = userModel.getObservableList();
+            userTableAdmin.setItems(currentUsers);
+            System.out.println("Number of events in ObservableList: " + currentUsers.size());
+
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+
+    }
+
+    private void displayError(Throwable t) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
+    }
+
+
     @FXML
     private void onManageEntityButtonPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin- .fxml"));

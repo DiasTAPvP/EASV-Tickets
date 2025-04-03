@@ -55,6 +55,11 @@ public class CreateUserController {
         Stage stage = (Stage) saveNewUserButton.getScene().getWindow();
         stage.close();
 
+        //Refresh the user table in the admin screen
+        if (adminScreenController != null) {
+            adminScreenController.refreshUserTable();
+        }
+
     }
 
 

@@ -49,6 +49,8 @@ public class CoordScreenController {
 
     private Events selectedEvent;
 
+
+
     public CoordScreenController() throws Exception {
         this.eventDAO = new EventDAO();
         this.eventModel = new EventModel();
@@ -170,10 +172,26 @@ public class CoordScreenController {
             }
         });
 
+    }
 
+    private void displayError(Throwable t) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
+    }
 
-
-
+    public void tableRefresh() {
+        System.out.println("Refreshing tables");
+        try {
+            eventModel.refreshEvents();
+            ObservableList<Events> currentEvents = eventModel.getObservableList();
+            coordEventTable.setItems(currentEvents);
+            System.out.println("Number of events in ObservableList: " + currentEvents.size());
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
     }
 
     private void loadUsers() {

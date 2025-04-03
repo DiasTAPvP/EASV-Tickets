@@ -3,6 +3,8 @@ package com.example.easvtickets.GUI.Model;
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.BLL.EventManager;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class EventModel {
 
@@ -10,11 +12,25 @@ public class EventModel {
 
     private final EventDAO eventDAO = new EventDAO();
 
+    private final ObservableList<Events> eventsToBeViewed = FXCollections.observableArrayList();
+
 
     public EventModel() throws Exception {
     eventManager = new EventManager();
+    }
 
-}
+    public void createEvent(Events newEvent) throws Exception {
+        //Create the event through the layers
+        Events eventCreated = eventManager.createEvent(newEvent);
+
+        //Add to the ObservableList
+        eventsToBeViewed.add(eventCreated);
+        System.out.println("Event added to ObservableList" + eventCreated);
+    }
+
+    public ObservableList<Events> getObservableList() {
+        return eventsToBeViewed;
+    }
 
 
     public void deleteEvents(Events selectedEvent) throws Exception {
@@ -22,6 +38,13 @@ public class EventModel {
         eventManager.deleteEvent(selectedEvent);
 
         //Remove from the ObservableList
+        eventsToBeViewed.remove(selectedEvent);
+    }
+
+    public void refreshEvents() throws Exception {
+        //Refresh the ObservableList
+        eventsToBeViewed.clear();
+        eventsToBeViewed.addAll(eventManager.getAllEvents());
     }
 
 
