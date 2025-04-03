@@ -23,10 +23,10 @@
       </Label>
       <Button layoutX="140.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
       <Button layoutX="405.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
-      <Button layoutX="270.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" promptText="Amount" />
+      <TextField fx:id="customerName" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
+      <TextField fx:id="customerMail" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
+      <Button fx:id="qrGeneratorButton" layoutX="270.0" layoutY="632.0" mnemonicParsing="false" onAction="#onQrGeneratorButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <TextField fx:id="ticketAmount" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" promptText="Amount" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
@@ -42,8 +42,8 @@
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <TextArea fx:id="newEventInfo" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css" wrapText="true" />
-      <Label fx:id="infoTextAdmin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="44.0" prefHeight="38.0" prefWidth="400.0" text="Event">
+      <TextArea fx:id="infoTicketEvent" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" stylesheets="@style.css" wrapText="true" />
+      <Label fx:id="infoTextTicket" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="44.0" prefHeight="38.0" prefWidth="400.0" text="Event">
          <font>
             <Font size="26.0" />
          </font>
