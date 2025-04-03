@@ -2,6 +2,7 @@ package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
 import com.example.easvtickets.DAL.DAO.EventDAO;
+import com.example.easvtickets.GUI.Model.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -15,9 +16,11 @@ public class EventWindowController {
 
     private CoordScreenController setCoordScreenController;
     private EventDAO eventDAO;
+    private EventModel eventModel;
 
-    public EventWindowController() throws IOException {
+    public EventWindowController() throws Exception {
         this.eventDAO = new EventDAO();
+        this.eventModel = new EventModel();
     }
     @FXML private Button newEventSaveButton;
     @FXML private TextArea newEventInfo;
@@ -110,7 +113,7 @@ public class EventWindowController {
                 selectedEvent.setAvailableTickets(availableTickets);
                 selectedEvent.setOptionalInformation(optionalInformation);
 
-                eventDAO.updateEvent(selectedEvent);
+                eventModel.updateEvent(selectedEvent);
 
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Event updated successfully!");
             }
@@ -119,7 +122,7 @@ public class EventWindowController {
 
                 Events newEvent = new Events(0, eventName, eventDescription, eventDate, eventLocation,
                         eventNotes, availableTickets, optionalInformation);
-                eventDAO.createEvent(newEvent);
+                eventModel.createEvent(newEvent);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
             }
 

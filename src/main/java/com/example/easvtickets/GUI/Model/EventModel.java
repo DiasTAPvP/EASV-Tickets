@@ -48,6 +48,14 @@ public class EventModel {
     }
 
 
+    public void updateEvent(Events selectedEvent) throws Exception {
+        //Update the event through the layers
+        eventManager.updateEvent(selectedEvent);
 
-
+        //Update the ObservableList
+        int index = eventsToBeViewed.indexOf(selectedEvent);
+        if (index != -1) {
+            eventsToBeViewed.set(index, selectedEvent);
+        }
+    }
 }
