@@ -4,6 +4,7 @@ import com.example.easvtickets.BE.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -11,10 +12,10 @@ import javafx.scene.Parent;
 //import java.awt.event.ActionEvent;
 
 public class PersonalInfoController {
+    @FXML private Label usernameLabel;
 
-    @FXML
-    public void initialize() {
-    }
+
+
 
     @FXML
     private void onChangePassButtonPressed(ActionEvent event) throws Exception {
@@ -32,4 +33,13 @@ public class PersonalInfoController {
     public void setUser(Users user) {
         currentUser = user;
     }
+
+@FXML
+public void initialize() {
+    //Set the label to the current user
+    usernameLabel.setText("Bo");
+    //usernameLabel.setText(currentUser.getUsername());
+
 }
+}
+

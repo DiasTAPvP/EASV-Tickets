@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 
 import javax.swing.*;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.io.IOException;
 
@@ -222,14 +223,15 @@ public class CoordScreenController {
     }
 
     private void displayEventDetails(Events event) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         StringBuilder details = new StringBuilder();
         details.append("Event: ").append(event.getEventName()).append("\n");
         details.append("Description: ").append(event.getDescription()).append("\n");
-        details.append("Date: ").append(event.getEventDate()).append("\n");
+        details.append("Date: ").append(event.getEventDate().toLocalDateTime().format(formatter)).append("\n");
         details.append("Location: ").append(event.getLocation()).append("\n");
         details.append("Notes: ").append(event.getNotes()).append("\n");
         details.append("Available Tickets: ").append(event.getAvailableTickets()).append("\n");
-        details.append("Optional Information: ").append(event.getOptionalInformation()).append("\n");
+
 
         currentEventInfoCoord.setText(details.toString());
     }

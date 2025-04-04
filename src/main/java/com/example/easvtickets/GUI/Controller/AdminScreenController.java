@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AdminScreenController {
@@ -129,6 +130,23 @@ public class AdminScreenController {
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
         adminPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
+        eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
+            @Override
+            protected void updateItem(Timestamp eventDate, boolean empty) {
+                super.updateItem(eventDate, empty);
+                if (empty || eventDate == null) {
+                    setText(null);
+                } else {
+                    // Format as DD/MM/YYYY
+                    setText(String.format("%02d/%02d/%d %02d:%02d",
+                            eventDate.toLocalDateTime().getDayOfMonth(),
+                            eventDate.toLocalDateTime().getMonthValue(),
+                            eventDate.toLocalDateTime().getYear(),
+                            eventDate.toLocalDateTime().getHour(),
+                            eventDate.toLocalDateTime().getMinute()));
+                }
+            }
+        });
 
         loadEvents();
         loadUsers();
@@ -171,14 +189,14 @@ public class AdminScreenController {
     }
 
     private void displayEventDetails(Events event) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         StringBuilder details = new StringBuilder();
         details.append("Event: ").append(event.getEventName()).append("\n");
         details.append("Description: ").append(event.getDescription()).append("\n");
-        details.append("Date: ").append(event.getEventDate()).append("\n");
+        details.append("Date: ").append(event.getEventDate().toLocalDateTime().format(formatter)).append("\n");
         details.append("Location: ").append(event.getLocation()).append("\n");
         details.append("Notes: ").append(event.getNotes()).append("\n");
         details.append("Available Tickets: ").append(event.getAvailableTickets()).append("\n");
-        details.append("Optional Information: ").append(event.getOptionalInformation()).append("\n");
 
         entityInfoAdmin.setText(details.toString());
     }
