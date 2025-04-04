@@ -103,6 +103,8 @@ public class CoordScreenController {
 
         //Passes selected event to edit
         eventController.setSelectedEvent(selectedEvent);
+        //?PleaseUpdate????
+        eventController.setCoordScreenController(this);
 
         Stage stage = new Stage();
         stage.setTitle("Manage Events");
