@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Tooltip?>
 
 <AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.CoordScreenController">
    <children>
@@ -23,10 +24,23 @@
             <TableColumn fx:id="eventDateColumn" prefWidth="178.0" text="Date" />
          </columns>
       </TableView>
-      <Button fx:id="manageEventButton" layoutX="333.0" layoutY="667.0" mnemonicParsing="false" onAction="#onManageButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <Button fx:id="createEventButton" layoutX="271.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <Button fx:id="ticketsButton" layoutX="209.0" layoutY="666.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
-      <TextArea fx:id="currentEventInfoCoord" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" wrapText="true" />
+      <Button fx:id="manageEventButton" layoutX="333.0" layoutY="667.0" mnemonicParsing="false" onAction="#onManageButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Edit selected event" />
+         </tooltip>
+      </Button>
+
+      <Button fx:id="createEventButton" layoutX="271.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCreateButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Create a new event" />
+         </tooltip>
+      </Button>
+
+      <Button fx:id="ticketsButton" layoutX="209.0" layoutY="666.0" mnemonicParsing="false" onAction="#onTicketsPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Generate tickets for event" />
+         </tooltip>
+      </Button><TextArea fx:id="currentEventInfoCoord" layoutX="590.0" layoutY="89.0" prefHeight="570.0" prefWidth="400.0" styleClass="tables" wrapText="true" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />
@@ -52,19 +66,31 @@
             <Image url="@images/create_event_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="deleteEventButton" layoutX="394.0" layoutY="666.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="deleteEventButton" layoutX="394.0" layoutY="666.0" mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Delete selected event" />
+         </tooltip>
+      </Button>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="406.0" layoutY="667.0" mouseTransparent="true">
          <image>
             <Image url="@images/delete_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="coordLogout" layoutX="983.0" layoutY="693.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="coordLogout" layoutX="983.0" layoutY="693.0" mnemonicParsing="false" onAction="#onLogoutPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Log out of the system" />
+         </tooltip>
+      </Button>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="996.0" layoutY="694.0" mouseTransparent="true">
          <image>
             <Image url="@images/logout_icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="personInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" onAction="#onPersonInfoButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login" />
+      <Button fx:id="personInfoButton" layoutX="916.0" layoutY="693.0" mnemonicParsing="false" onAction="#onPersonInfoButtonPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="View personal information" />
+         </tooltip>
+      </Button>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="929.0" layoutY="694.0" mouseTransparent="true">
          <image>
             <Image url="@images/personal_info_icon.png" />
