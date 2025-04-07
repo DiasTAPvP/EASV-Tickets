@@ -134,7 +134,7 @@ public class TicketController {
                 ", Date: " + event.getEventDate() +
                 ", Email: " + customerEmail;
 
-        BitMatrix qrMatrix = generateQRCode(ticketData, 25, 25);
+        BitMatrix qrMatrix = generateQRCode(ticketData, 77, 77);
 
 
 
