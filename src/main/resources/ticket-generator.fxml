@@ -34,14 +34,14 @@
          </tooltip>
       </Button>
 
-      <Button fx:id="generateTicket" layoutX="270.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+      <Button fx:id="generateTicket" layoutX="270.0" layoutY="632.0" mnemonicParsing="false" onAction="#onGenerateTicketPress" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
          <tooltip>
             <Tooltip text="Generate ticket" />
          </tooltip>
       </Button>
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
-      <TextField alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" promptText="Amount" />
+      <TextField fx:id="customerName" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="89.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
+      <TextField fx:id="customerEmail" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" promptText="E-mail" />
+      <TextField fx:id="ticketAmount" alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" promptText="Amount" />
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/easv.jpg" />

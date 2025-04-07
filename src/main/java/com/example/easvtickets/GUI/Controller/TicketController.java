@@ -1,17 +1,23 @@
 package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.GUI.Model.EventModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
+
+import java.awt.*;
 import java.io.File;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.time.format.DateTimeFormatter;
+
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -19,10 +25,13 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.Document;
+import javafx.scene.control.TextField;
 
 
 public class TicketController {
 
+    @FXML
+    public TextField customerEmail;
 
     /**
      * Implement:
@@ -38,6 +47,48 @@ public class TicketController {
 
     public void setCoordScreenController(CoordScreenController coordScreenController) {
         this.setCoordScreenController = coordScreenController;
+    }
+
+
+
+    public void onGenerateTicketPress() {
+        Events selectedEvent = setCoordScreenController.getSelectedEvent();
+        String email = customerEmail.getText();
+
+        if (email == null || email.isEmpty()) {
+            System.out.println("Please enter a valid email.");
+            return;
+        }
+
+        if (selectedEvent == null) {
+            System.out.println("Please select an event first.");
+            return;
+        }
+
+        // Generate the QR and PDF
+        processQRCode(selectedEvent, email);
+
+        // Display the ticket (optional: you could store the ticket path)
+        File ticketFile = new File("ticket_for_" + email + ".pdf");
+        if (ticketFile.exists()) {
+            displayPDF(ticketFile);
+        } else {
+            System.out.println("Ticket PDF was not created.");
+        }
+    }
+
+    private void displayPDF(File file) {
+        try {
+            // Option 1: open in system default viewer
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            } else {
+                System.out.println("Desktop is not supported. Cannot open PDF.");
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to open PDF: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 
@@ -76,14 +127,14 @@ public class TicketController {
         }
     }
 
-    private void processQRCode(Events event, String recipientEmail) {
+    private void processQRCode(Events event, String customerEmail) {
         // Generate QR code for a ticket
         String ticketData = "Event: " + event.getEventName() +
                 ", ID: " + event.getEventId() +
                 ", Date: " + event.getEventDate() +
-                ", Email: " + recipientEmail;
+                ", Email: " + customerEmail;
 
-        BitMatrix qrMatrix = generateQRCode(ticketData, 250, 250);
+        BitMatrix qrMatrix = generateQRCode(ticketData, 25, 25);
 
 
 
@@ -101,7 +152,7 @@ public class TicketController {
                 System.out.println("QR code generated successfully: " + qrFile.getAbsolutePath());
 
                 // Here you would call your method to create the full ticket with the QR code
-                createTicketWithQR(event, recipientEmail, qrFile);
+                createTicketWithQR(event, customerEmail, qrFile);
 
             } catch (IOException e) {
                 System.err.println("Failed to save QR code image: " + e.getMessage());
@@ -132,8 +183,11 @@ public class TicketController {
             Document document = new Document(pdfDoc);
 
             // Add ticket details
-            document.add(new Paragraph("Ticket for Event: " + event.getEventName()).setFontSize(18).setBold());
-            document.add(new Paragraph("Event Date: " + event.getEventDate()));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            document.add(new Paragraph("Ticket for: " + event.getEventName()).setFontSize(18).setBold());
+            document.add(new Paragraph("Date: " + event.getEventDate().toLocalDateTime().format(formatter)));
+            document.add(new Paragraph("Location: " +event.getLocation() ));
+            document.add(new Paragraph("Notes: " +event.getNotes()));
 
 
             // Add some space
@@ -155,6 +209,20 @@ public class TicketController {
             e.printStackTrace();
         }
     }
+
+    /*private void loadEvents() {
+        try {
+            eventModel.refreshEvents();
+            coordEventTable.setItems(eventModel.getObservableList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initialize() {
+
+    }*/
+
 }
 
 
