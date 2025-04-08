@@ -3,18 +3,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Tooltip?>
 
-<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.LoginController">
    <children>
       <PasswordField fx:id="loginPassword" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="93.0" prefHeight="25.0" prefWidth="190.0" promptText="Password" />
       <TextField fx:id="loginUsername" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="58.0" prefHeight="25.0" prefWidth="190.0" promptText="Username" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="147.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASV Ticket Login">
          <font>
             <Font size="26.0" />
@@ -33,6 +32,13 @@
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="238.0" layoutY="132.0" mouseTransparent="true">
          <image>
             <Image url="@images/login_icon.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="loginPasswordVisible" alignment="BOTTOM_CENTER" layoutX="155.0" layoutY="93.0" prefHeight="25.0" prefWidth="190.0" />
+      <Button fx:id="togglePasswordVisibility" layoutX="320.0" layoutY="93.0" mnemonicParsing="false" onAction="#onTogglePasswordPressed" prefHeight="15.0" prefWidth="19.0" style="-fx-background-color: transparent; -fx-padding: 0;" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="317.0" layoutY="93.0">
+         <image>
+            <Image url="@images/show_password_icon.png" />
          </image>
       </ImageView>
    </children>

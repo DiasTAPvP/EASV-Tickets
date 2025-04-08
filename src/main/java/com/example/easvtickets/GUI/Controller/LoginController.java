@@ -29,6 +29,12 @@ public class LoginController implements Initializable {
     private TextField loginUsername;
     @FXML
     private PasswordField loginPassword;
+    @FXML
+    private Button togglePasswordButton;
+    @FXML
+    private TextField loginPasswordVisible;
+
+    private boolean passwordVisible = false;
 
     private UserManager userManager;
 
@@ -123,6 +129,13 @@ public class LoginController implements Initializable {
         }
     }*/
 
+    @FXML
+    private void onTogglePasswordPressed() {
+        passwordVisible = !passwordVisible;
+
+        loginPassword.setVisible(!passwordVisible);
+        loginPasswordVisible.setVisible(passwordVisible);
+    }
 
     @FXML
     private void onLoginPressed() throws IOException {
@@ -167,6 +180,10 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        loginPasswordVisible.setVisible(false);
+        loginPasswordVisible.managedProperty().bind(loginPasswordVisible.visibleProperty());
+        loginPasswordVisible.textProperty().bindBidirectional(loginPassword.textProperty());
+
     }
 
     public boolean login(String username, String password) {
