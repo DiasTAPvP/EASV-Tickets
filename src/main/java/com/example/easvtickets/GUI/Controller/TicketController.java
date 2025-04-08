@@ -17,6 +17,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
@@ -127,12 +128,30 @@ public class TicketController {
         }
     }
 
+    /*public void generateQRHash() {
+        String generatedQRHash = generateRandomQRHash();
+    }*/
+
+    private String generateRandomQRHash() {
+        int length = 6;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?";
+        Random random = new Random();
+        StringBuilder QRHash = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            QRHash.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return QRHash.toString();
+    }
+
+
     private void processQRCode(Events event, String customerEmail) {
         // Generate QR code for a ticket
+        String generatedHash = generateRandomQRHash();
         String ticketData = "Event: " + event.getEventName() +
                 ", ID: " + event.getEventId() +
                 ", Date: " + event.getEventDate() +
-                ", Email: " + customerEmail;
+                ", Email: " + customerEmail +
+                ", QRHash: " + generatedHash;
 
         BitMatrix qrMatrix = generateQRCode(ticketData, 77, 77);
 
@@ -210,18 +229,6 @@ public class TicketController {
         }
     }
 
-    /*private void loadEvents() {
-        try {
-            eventModel.refreshEvents();
-            coordEventTable.setItems(eventModel.getObservableList());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void initialize() {
-
-    }*/
 
 }
 
