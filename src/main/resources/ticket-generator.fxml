@@ -28,7 +28,7 @@
          </tooltip>
       </Button>
 
-      <Button fx:id="printTicket" layoutX="405.0" layoutY="632.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
+      <Button fx:id="printTicket" layoutX="405.0" layoutY="632.0" mnemonicParsing="false" onAction="#onPrintTicketPressed" prefHeight="25.0" prefWidth="50.0" styleClass="button-login">
          <tooltip>
             <Tooltip text="Print ticket" />
          </tooltip>
@@ -78,7 +78,7 @@
             <Image url="@images/print_icon.png" />
          </image>
       </ImageView>
-      <CheckBox layoutX="230.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Free Tickets">
+      <CheckBox fx:id="specialTickets" layoutX="220.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Special Tickets">
          <font>
             <Font size="18.0" />
          </font>
