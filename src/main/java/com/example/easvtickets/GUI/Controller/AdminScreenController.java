@@ -2,6 +2,7 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.Tickets;
 import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.BLL.UserManager;
 import com.example.easvtickets.DAL.DAO.EventDAO;

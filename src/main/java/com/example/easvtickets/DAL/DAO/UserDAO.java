@@ -61,6 +61,7 @@ public class UserDAO implements IUserDataAccess {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new Exception("Could not create user in database.", e);
         }
         return newUser;
     }

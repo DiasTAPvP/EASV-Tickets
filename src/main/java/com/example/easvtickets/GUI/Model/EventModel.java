@@ -1,6 +1,7 @@
 package com.example.easvtickets.GUI.Model;
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.Tickets;
 import com.example.easvtickets.BLL.EventManager;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import javafx.collections.FXCollections;
@@ -32,12 +33,15 @@ public class EventModel {
         return eventsToBeViewed;
     }
 
+    public void addTicketToEvent(Tickets ticket) throws Exception {
+        eventManager.addTicket(ticket);
+    }
 
     public void deleteEvents(Events selectedEvent) throws Exception {
-        //Delete from the database through the layers
+        // Delete from the database through the layers (internally handles tickets)
         eventManager.deleteEvent(selectedEvent);
 
-        //Remove from the ObservableList
+        // Remove from the ObservableList
         eventsToBeViewed.remove(selectedEvent);
     }
 
