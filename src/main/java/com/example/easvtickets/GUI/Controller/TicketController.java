@@ -27,6 +27,7 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.Document;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 
 public class TicketController {
@@ -274,6 +275,25 @@ public class TicketController {
         } catch (IOException e) {
             System.err.println("Failed to create ticket PDF: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private TextArea newEventInfo;
+
+    public void setEventDetails(Events selectedEvent) {
+        if (selectedEvent != null) {
+            StringBuilder details = new StringBuilder();
+            details.append("Event. ").append(selectedEvent.getEventName()).append("\n");
+            details.append("Description: ").append(selectedEvent.getDescription()).append("\n");
+            details.append("Date: ").append(selectedEvent.getEventDate()).append("\n");
+            details.append("Location: ").append(selectedEvent.getLocation()).append("\n");
+            details.append("Notes: ").append(selectedEvent.getNotes()).append("\n");
+            details.append("Available Tickets: ").append(selectedEvent.getAvailableTickets()).append("\n");
+            details.append("Optional Info: ").append(selectedEvent.getOptionalInformation());
+
+            newEventInfo.setText(details.toString());
+
         }
     }
 

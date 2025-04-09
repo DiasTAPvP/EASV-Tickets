@@ -83,6 +83,8 @@ public class CoordScreenController {
         TicketController ticketcontroller = loader.getController();
         ticketcontroller.setCoordScreenController(this);
 
+        ticketcontroller.setEventDetails(selectedEvent);
+
         Stage stage = new Stage();
         stage.setTitle("Ticket Generator");
         stage.setScene(new Scene(root));
