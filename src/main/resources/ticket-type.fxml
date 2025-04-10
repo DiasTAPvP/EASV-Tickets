@@ -22,7 +22,7 @@
       <TextField fx:id="ticketName" alignment="BOTTOM_CENTER" layoutX="120.0" layoutY="18.0" prefHeight="25.0" prefWidth="190.0" promptText="Ticket name" />
       <TableView fx:id="ticketTable" layoutX="325.0" layoutY="18.0" prefHeight="111.0" prefWidth="161.0">
         <columns>
-          <TableColumn fx:id="ticketTabelCol" prefWidth="159.0" text="Tickets" />
+          <TableColumn fx:id="ticketTableCol" prefWidth="159.0" text="Ticket Types" />
         </columns>
       </TableView>
       <TextArea fx:id="ticketDescription" layoutX="120.0" layoutY="67.0" prefHeight="63.0" prefWidth="190.0" wrapText="true">
