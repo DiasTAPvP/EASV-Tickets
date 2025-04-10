@@ -2,6 +2,7 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.TicketType;
 import com.example.easvtickets.BE.Tickets;
 import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.DAL.DAO.EventDAO;
@@ -16,6 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -39,6 +43,8 @@ public class CoordScreenController {
     @FXML private TableColumn<Events, Timestamp> eventDateColumn;
     @FXML private TableView<Users> availableCoordPeopleTable;
     @FXML private TableColumn<Users, String> availableCoordPeopleColumn;
+    @FXML private TableView<Users> assignedCoordPeopleTable;
+    @FXML private TableColumn<Users, String> assignedCoordPeopleColumn;
     @FXML private TableColumn<Events, String> eventDescriptionColumn;
     @FXML private TableColumn<Events, String> eventLocationColumn;
     @FXML private TableColumn<Events, Integer> availableTicketsColumn;
@@ -137,6 +143,8 @@ public class CoordScreenController {
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
         availableCoordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
+        assignedCoordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+
 
         eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
             @Override
@@ -158,6 +166,8 @@ public class CoordScreenController {
 
         loadEvents();
         loadUsers();
+        setupDragAndDrop();
+        setupRemoveCoordinatorContextMenu();
 
         availableCoordPeopleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -174,6 +184,9 @@ public class CoordScreenController {
                 System.out.println("Selected Event: " + selectedEvent.getEventName());
                 infoLabelCoord.setText(selectedEvent.getEventName());
                 displayEventDetails(newValue);
+
+                // Load assigned coordinators for the selected event
+                loadAssignedCoordinators(selectedEvent.getEventId());
             }
         });
 
@@ -214,6 +227,17 @@ public class CoordScreenController {
         }
     }
 
+    private void loadAssignedCoordinators(int eventId) {
+        try {
+            List<Users> assignedCoordinators = userDAO.getAssignedCoordinators(eventId);
+            ObservableList<Users> coordinatorsObservableList = FXCollections.observableArrayList(assignedCoordinators);
+            assignedCoordPeopleTable.setItems(coordinatorsObservableList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            infoLabelCoord.setText("Error loading assigned coordinators: " + e.getMessage());
+        }
+    }
+
     private void loadEvents() {
         try {
             eventModel.refreshEvents();
@@ -235,6 +259,82 @@ public class CoordScreenController {
 
 
         currentEventInfoCoord.setText(details.toString());
+    }
+
+
+    private void setupDragAndDrop() {
+        // Enable drag from available coordinators
+        availableCoordPeopleTable.setOnDragDetected(event -> {
+            if (availableCoordPeopleTable.getSelectionModel().getSelectedItem() != null) {
+                Dragboard db = availableCoordPeopleTable.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(String.valueOf(availableCoordPeopleTable.getSelectionModel().getSelectedItem().getLoginid()));
+                db.setContent(content);
+                event.consume();
+            }
+        });
+
+        // Enable drop on assigned coordinators
+        assignedCoordPeopleTable.setOnDragOver(event -> {
+            if (event.getGestureSource() != assignedCoordPeopleTable &&
+                    event.getDragboard().hasString() &&
+                    selectedEvent != null) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        assignedCoordPeopleTable.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasString() && selectedEvent != null) {
+                try {
+                    int userId = Integer.parseInt(db.getString());
+                    Users draggedUser = availableCoordPeopleTable.getItems().stream()
+                            .filter(user -> user.getLoginid() == userId)
+                            .findFirst()
+                            .orElse(null);
+
+                    if (draggedUser != null) {
+                        // Assign the user to the event
+                        userDAO.assignCoordinatorToEvent(userId, selectedEvent.getEventId());
+
+                        // Refresh the assigned coordinators table
+                        loadAssignedCoordinators(selectedEvent.getEventId());
+                        success = true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    infoLabelCoord.setText("Error assigning coordinator: " + e.getMessage());
+                }
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+    }
+
+    private void setupRemoveCoordinatorContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem removeItem = new MenuItem("Remove Coordinator");
+
+        removeItem.setOnAction(event -> {
+            Users selectedUser = assignedCoordPeopleTable.getSelectionModel().getSelectedItem();
+            if (selectedUser != null && selectedEvent != null) {
+                try {
+                    userDAO.removeCoordinatorFromEvent(selectedUser.getLoginid(), selectedEvent.getEventId());
+                    loadAssignedCoordinators(selectedEvent.getEventId());
+                    infoLabelCoord.setText("Coordinator removed successfully.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    infoLabelCoord.setText("Error removing coordinator: " + e.getMessage());
+                }
+            }
+        });
+
+        contextMenu.getItems().add(removeItem);
+        assignedCoordPeopleTable.setContextMenu(contextMenu);
     }
 
     public void forceRefresh() {

@@ -14,6 +14,7 @@ public class TicketTypeManager {
         ticketTypeDAO = new TicketTypeDAO();
     }
 
+
     public List<TicketType> getAllTicketTypes() throws Exception {
         return ticketTypeDAO.getAllTicketTypes();
     }

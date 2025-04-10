@@ -83,7 +83,80 @@ public class UserDAO implements IUserDataAccess {
         }
     }
 
+    public List<Users> getAssignedCoordinators(int eventId) throws Exception {
+        List<Users> assignedCoordinators = new ArrayList<>();
+        String sql = "SELECT u.* FROM Logins u " +
+                "JOIN EventCoordinators ec ON u.loginid = ec.loginid " +
+                "WHERE ec.eventid = ?";
 
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Users user = new Users(
+                            rs.getInt("loginid"),
+                            rs.getString("username"),
+                            rs.getString("passwordhash"),
+                            rs.getBoolean("isadmin"),
+                            rs.getTimestamp("createdat")
+                    );
+
+                    assignedCoordinators.add(user);
+                }
+            }
+        }
+
+        return assignedCoordinators;
+    }
+
+    /**
+     * Assigns a user as a coordinator to an event
+     * @param userId The user's ID
+     * @param eventId The event's ID
+     * @throws Exception If there's an error during the database operation
+     */
+    public void assignCoordinatorToEvent(int userId, int eventId) throws Exception {
+        // First check if this assignment already exists
+        String checkSql = "SELECT COUNT(*) FROM EventCoordinators WHERE loginid = ? AND eventid = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
+
+            checkStmt.setInt(1, userId);
+            checkStmt.setInt(2, eventId);
+
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    // Assignment already exists, no need to insert
+                    return;
+                }
+            }
+
+            // Assignment doesn't exist, insert it
+            String insertSql = "INSERT INTO EventCoordinators (loginid, eventid) VALUES (?, ?)";
+            try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+                insertStmt.setInt(1, userId);
+                insertStmt.setInt(2, eventId);
+                insertStmt.executeUpdate();
+            }
+        }
+    }
+
+    public void removeCoordinatorFromEvent(int userId, int eventId) throws Exception {
+        String sql = "DELETE FROM EventCoordinators WHERE loginid = ? AND eventid = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, eventId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Could not remove coordinator from event.", e);
+        }
+    }
 
     @Override
     public void updateUser(Users user) throws Exception {
