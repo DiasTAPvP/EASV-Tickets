@@ -10,4 +10,10 @@ public class TicketTypeController {
     public void setCoordScreenController(CoordScreenController coordScreenController) {
         this.setCoordScreenController = coordScreenController;
     }
+
+
+
+
+
+
 }
