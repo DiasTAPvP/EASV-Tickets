@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Tooltip?>
+
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketTypeController">
+   <children>
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/easv.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="ticketName" alignment="BOTTOM_CENTER" layoutX="120.0" layoutY="18.0" prefHeight="25.0" prefWidth="190.0" promptText="Ticket name" />
+      <TableView fx:id="ticketTable" layoutX="325.0" layoutY="18.0" prefHeight="111.0" prefWidth="161.0">
+        <columns>
+          <TableColumn fx:id="ticketTabelCol" prefWidth="159.0" text="Tickets" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="ticketDescription" layoutX="120.0" layoutY="67.0" prefHeight="63.0" prefWidth="190.0" wrapText="true">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextArea>
+      <Text fx:id="ticketDescriptionText" layoutX="168.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket description" />
+      <Button fx:id="deleteTicketButton" layoutX="384.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="43.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Delete Ticket" />
+         </tooltip>
+      </Button>
+
+      <Button fx:id="addTicketButton" layoutX="197.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="button-login">
+         <tooltip>
+            <Tooltip text="Add Ticket" />
+         </tooltip>
+      </Button>
+
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="202.0" layoutY="136.0" mouseTransparent="true">
+         <image>
+            <Image url="@images/+add_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="393.0" layoutY="136.0" mouseTransparent="true">
+         <image>
+            <Image url="@images/delete_icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

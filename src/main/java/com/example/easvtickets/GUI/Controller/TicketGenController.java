@@ -24,12 +24,15 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.Document;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 
 public class TicketGenController {
 
     @FXML
     public TextField customerEmail;
+    @FXML
+    public Checkbox specialTicket;
 
     /**
      * Implement:
@@ -47,9 +50,7 @@ public class TicketGenController {
         this.setCoordScreenController = coordScreenController;
     }
 
-
-
-    public void onGenerateTicketPress() {
+    private void generateAndDisplayTicket() {
         Events selectedEvent = setCoordScreenController.getSelectedEvent();
         String email = customerEmail.getText();
 
@@ -74,6 +75,16 @@ public class TicketGenController {
             System.out.println("Ticket PDF was not created.");
         }
     }
+
+     public void onGenerateTicketPress() {
+         generateAndDisplayTicket();
+    }
+
+
+    public void onPrintTicketPressed() {
+        generateAndDisplayTicket();
+    }
+
 
     private void displayPDF(File file) {
         try {
@@ -180,6 +191,44 @@ public class TicketGenController {
         }
     }
 
+    private void processSpecialQRCode(Events event, String customerEmail) {
+        String generatedHash = generateRandomQRHash();
+        String SpecialTicketData = "Event: " + event.getEventName() +
+                ", ID: " + event.getEventId() +
+                ", Date: " + event.getEventDate() +
+                ", Email: " + customerEmail +
+                ", QRHash: " + generatedHash;
+
+        BitMatrix qrMatrix = generateQRCode(SpecialTicketData, 77, 77);
+
+
+
+        // Check if QR code was generated successfully
+        if (qrMatrix != null) {
+            try {
+                // Convert matrix to image
+                BufferedImage qrImage = matrixToImage(qrMatrix);
+
+                // Save to temporary file
+                File qrFile = File.createTempFile("special_ticket_qr_", ".png");
+                ImageIO.write(qrImage, "PNG", qrFile);
+
+                // Now you can use this image for the ticket (e.g., embed in PDF, email)
+                System.out.println("QR code generated successfully: " + qrFile.getAbsolutePath());
+
+                // Here you would call your method to create the full ticket with the QR code
+                createTicketWithQR(event, customerEmail, qrFile);
+
+            } catch (IOException e) {
+                System.err.println("Failed to save QR code image: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            // Handle the error case
+            System.err.println("Failed to generate QR code");
+        }
+    }
+
 
     // This method would be implemented to create the complete ticket using the QR code
     private void createTicketWithQR(Events event, String recipientEmail, File qrCodeFile) {
@@ -223,6 +272,25 @@ public class TicketGenController {
         } catch (IOException e) {
             System.err.println("Failed to create ticket PDF: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private TextArea newEventInfo;
+
+    public void setEventDetails(Events selectedEvent) {
+        if (selectedEvent != null) {
+            StringBuilder details = new StringBuilder();
+            details.append("Event. ").append(selectedEvent.getEventName()).append("\n");
+            details.append("Description: ").append(selectedEvent.getDescription()).append("\n");
+            details.append("Date: ").append(selectedEvent.getEventDate()).append("\n");
+            details.append("Location: ").append(selectedEvent.getLocation()).append("\n");
+            details.append("Notes: ").append(selectedEvent.getNotes()).append("\n");
+            details.append("Available Tickets: ").append(selectedEvent.getAvailableTickets()).append("\n");
+            details.append("Optional Info: ").append(selectedEvent.getOptionalInformation());
+
+            newEventInfo.setText(details.toString());
+
         }
     }
 
