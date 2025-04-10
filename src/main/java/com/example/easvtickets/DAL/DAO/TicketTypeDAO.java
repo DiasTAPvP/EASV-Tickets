@@ -77,7 +77,7 @@ public class TicketTypeDAO implements ITicketDataAccess {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Could not delete ticket type", e);
+            throw new Exception("Ticket type cannot be deleted because it's currently being used by a customer for an event.", e);
         }
     }
 
