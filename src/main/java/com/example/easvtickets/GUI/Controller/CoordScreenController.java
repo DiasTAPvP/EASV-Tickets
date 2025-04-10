@@ -2,8 +2,6 @@ package com.example.easvtickets.GUI.Controller;
 
 
 import com.example.easvtickets.BE.Events;
-import com.example.easvtickets.BE.TicketType;
-import com.example.easvtickets.BE.Tickets;
 import com.example.easvtickets.BE.Users;
 import com.example.easvtickets.DAL.DAO.EventDAO;
 import com.example.easvtickets.DAL.DAO.UserDAO;
@@ -87,7 +85,7 @@ public class CoordScreenController {
         Parent root = loader.load();
 
         //Get the controller and set the controller
-        TicketController ticketcontroller = loader.getController();
+        TicketGenController ticketcontroller = loader.getController();
         ticketcontroller.setCoordScreenController(this);
 
         Stage stage = new Stage();
@@ -111,7 +109,6 @@ public class CoordScreenController {
 
         //Passes selected event to edit
         eventController.setSelectedEvent(selectedEvent);
-        //?PleaseUpdate????
         eventController.setCoordScreenController(this);
 
         Stage stage = new Stage();
@@ -164,6 +161,7 @@ public class CoordScreenController {
             }
         });
 
+        //
         loadEvents();
         loadUsers();
         setupDragAndDrop();

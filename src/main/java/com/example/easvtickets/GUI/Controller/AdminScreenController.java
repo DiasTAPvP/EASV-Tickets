@@ -18,6 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -31,6 +34,8 @@ import java.util.List;
 public class AdminScreenController {
 
     @FXML private Button manageEntityButton;
+    @FXML private TableView<Users> assignedAdminCoordPeopleTable;
+    @FXML private TableColumn<Users, String> assignedAdminCoordPeopleColumn;
     @FXML private TableView<Events> eventTableAdmin;
     @FXML private TableView<Users> userTableAdmin;
     @FXML private TableColumn<Events, Integer> eventIdColumn;
@@ -131,6 +136,8 @@ public class AdminScreenController {
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
         adminPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
+        assignedAdminCoordPeopleColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+
         eventDateColumn.setCellFactory(column -> new TableCell<Events, Timestamp>() {
             @Override
             protected void updateItem(Timestamp eventDate, boolean empty) {
@@ -151,6 +158,8 @@ public class AdminScreenController {
 
         loadEvents();
         loadUsers();
+        setupDragAndDrop();
+        setupRemoveCoordinatorContextMenu();
 
         userTableAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -162,7 +171,13 @@ public class AdminScreenController {
 
         eventTableAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                selectedEvent = (Events) newValue;
+                System.out.println("Selected Event: " + selectedEvent.getEventName());
+                infoTextAdmin.setText(selectedEvent.getEventName());
                 displayEventDetails(newValue);
+
+                // Load assigned coordinators for the selected event
+                loadAssignedCoordinators(selectedEvent.getEventId());
             }
         });
 
@@ -201,6 +216,7 @@ public class AdminScreenController {
 
         entityInfoAdmin.setText(details.toString());
     }
+
     @FXML
     private void onAdminDeleteButtonPressed() throws Exception {
         //Implement functionality
@@ -225,6 +241,92 @@ public class AdminScreenController {
                 System.out.println("No event or user selected.");
 
             }
+        }
+    }
+
+    private void setupDragAndDrop() {
+        // Enable drag from available coordinators
+        userTableAdmin.setOnDragDetected(event -> {
+            if (userTableAdmin.getSelectionModel().getSelectedItem() != null) {
+                Dragboard db = userTableAdmin.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(String.valueOf(userTableAdmin.getSelectionModel().getSelectedItem().getLoginid()));
+                db.setContent(content);
+                event.consume();
+            }
+        });
+
+        // Enable drop on assigned coordinators
+        assignedAdminCoordPeopleTable.setOnDragOver(event -> {
+            if (event.getGestureSource() != assignedAdminCoordPeopleTable &&
+                    event.getDragboard().hasString() &&
+                    selectedEvent != null) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        assignedAdminCoordPeopleTable.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasString() && selectedEvent != null) {
+                try {
+                    int userId = Integer.parseInt(db.getString());
+                    Users draggedUser = userTableAdmin.getItems().stream()
+                            .filter(user -> user.getLoginid() == userId)
+                            .findFirst()
+                            .orElse(null);
+
+                    if (draggedUser != null) {
+                        // Assign the user to the event
+                        userDAO.assignCoordinatorToEvent(userId, selectedEvent.getEventId());
+
+                        // Refresh the assigned coordinators table
+                        loadAssignedCoordinators(selectedEvent.getEventId());
+                        success = true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    infoTextAdmin.setText("Error assigning coordinator: " + e.getMessage());
+                }
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+    }
+
+    private void setupRemoveCoordinatorContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem removeItem = new MenuItem("Remove Coordinator");
+
+        removeItem.setOnAction(event -> {
+            Users selectedUser = assignedAdminCoordPeopleTable.getSelectionModel().getSelectedItem();
+            if (selectedUser != null && selectedEvent != null) {
+                try {
+                    userDAO.removeCoordinatorFromEvent(selectedUser.getLoginid(), selectedEvent.getEventId());
+                    loadAssignedCoordinators(selectedEvent.getEventId());
+                    infoTextAdmin.setText("Coordinator removed successfully.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    infoTextAdmin.setText("Error removing coordinator: " + e.getMessage());
+                }
+            }
+        });
+
+        contextMenu.getItems().add(removeItem);
+        assignedAdminCoordPeopleTable.setContextMenu(contextMenu);
+    }
+
+    private void loadAssignedCoordinators(int eventId) {
+        try {
+            List<Users> assignedCoordinators = userDAO.getAssignedCoordinators(eventId);
+            ObservableList<Users> coordinatorsObservableList = FXCollections.observableArrayList(assignedCoordinators);
+            assignedAdminCoordPeopleTable.setItems(coordinatorsObservableList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            infoTextAdmin.setText("Error loading assigned coordinators: " + e.getMessage());
         }
     }
 

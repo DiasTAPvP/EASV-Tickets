@@ -1,7 +1,6 @@
 package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
-import com.example.easvtickets.GUI.Model.EventModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 
@@ -10,9 +9,8 @@ import java.io.File;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
+
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -20,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Image;
@@ -29,7 +26,7 @@ import com.itextpdf.layout.Document;
 import javafx.scene.control.TextField;
 
 
-public class TicketController {
+public class TicketGenController {
 
     @FXML
     public TextField customerEmail;
