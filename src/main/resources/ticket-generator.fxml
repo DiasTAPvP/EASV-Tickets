@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketGenController">
+<AnchorPane prefHeight="734.0" prefWidth="1047.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketGenController">
    <children>
       <HBox layoutX="626.0" layoutY="283.0" prefHeight="145.0" prefWidth="373.0" />
       <Label layoutX="206.0" layoutY="356.0" text="No  Selected Ticket">
@@ -52,7 +44,7 @@
             <Image url="@images/bar3.png" />
          </image>
       </ImageView>
-      <ComboBox layoutX="200.0" layoutY="191.0" prefHeight="25.0" prefWidth="190.0" promptText="                 Ticket Type">
+      <ComboBox fx:id="ticketTypePicker" layoutX="200.0" layoutY="191.0" prefHeight="25.0" prefWidth="190.0" promptText="                 Ticket Type">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -78,7 +70,7 @@
             <Image url="@images/print_icon.png" />
          </image>
       </ImageView>
-      <CheckBox fx:id="specialTickets" layoutX="220.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Special Tickets">
+      <CheckBox fx:id="specialTicket" layoutX="220.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Special Tickets">
          <font>
             <Font size="18.0" />
          </font>

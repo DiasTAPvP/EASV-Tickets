@@ -1,6 +1,8 @@
 package com.example.easvtickets.GUI.Controller;
 
 import com.example.easvtickets.BE.Events;
+import com.example.easvtickets.BE.TicketType;
+import com.example.easvtickets.GUI.Model.TicketTypeModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 
@@ -16,6 +18,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.List;
 
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -23,16 +26,19 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.Document;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 
 
 public class TicketGenController {
 
-    @FXML
-    public TextField customerEmail;
-    @FXML
-    public Checkbox specialTicket;
+    @FXML public TextField customerEmail;
+    @FXML public TextField customerName;
+    @FXML public TextField ticketAmount;
+    @FXML public Checkbox specialTickets;
+    @FXML public ComboBox ticketTypePicker;
 
     /**
      * Implement:
@@ -43,6 +49,14 @@ public class TicketGenController {
      * if the event has a special ticket
      */
 
+
+    private TicketTypeModel ticketTypeModel;
+    private TicketType selectedTicketType;
+    private Events selectedEvent;
+
+    public TicketGenController() throws Exception {
+        ticketTypeModel = new TicketTypeModel();
+    }
 
     private CoordScreenController setCoordScreenController;
 
@@ -276,6 +290,54 @@ public class TicketGenController {
     }
 
     @FXML
+    public void initialize() {
+        // Set up listener for ticket type selection
+        ticketTypePicker.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedTicketType = (TicketType) newValue;
+            }
+        });
+    }
+
+    private void setupTicketTypePicker() {
+        // Clear any existing items
+        ticketTypePicker.getItems().clear();
+
+        // Get the selected event from the coordinator screen
+        Events selectedEvent = setCoordScreenController.getSelectedEvent();
+
+        if (selectedEvent != null) {
+            try {
+                // Get ticket types for this specific event
+                List<TicketType> eventTicketTypes = ticketTypeModel.getTicketTypesForEvent(selectedEvent.getEventId());
+
+                // Add them to the combobox
+                ticketTypePicker.getItems().addAll(eventTicketTypes);
+
+                // Set a cell factory to display the ticket type names
+                ticketTypePicker.setCellFactory(lv -> new ListCell<TicketType>() {
+                    @Override
+                    protected void updateItem(TicketType item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? "" : item.getTypeName());
+                    }
+                });
+
+                // Same for the button area
+                ticketTypePicker.setButtonCell(new ListCell<TicketType>() {
+                    @Override
+                    protected void updateItem(TicketType item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(empty ? "" : item.getTypeName());
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
     private TextArea newEventInfo;
 
     public void setEventDetails(Events selectedEvent) {
@@ -290,6 +352,9 @@ public class TicketGenController {
             details.append("Optional Info: ").append(selectedEvent.getOptionalInformation());
 
             newEventInfo.setText(details.toString());
+
+            //Update ticket types for this event
+            setupTicketTypePicker();
 
         }
     }

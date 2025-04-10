@@ -15,4 +15,5 @@ public interface ITicketDataAccess {
 
     void updateTicketType(TicketType ticketType) throws Exception;
 
+    List<TicketType> getTicketTypesForEvent(int eventId);
 }

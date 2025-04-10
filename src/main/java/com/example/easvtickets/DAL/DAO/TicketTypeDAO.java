@@ -101,4 +101,40 @@ public class TicketTypeDAO implements ITicketDataAccess {
         }
     }
 
+    @Override
+    public List<TicketType> getTicketTypesForEvent(int eventId) {
+        List<TicketType> ticketTypeList = new ArrayList<>();
+        String sql = "SELECT DISTINCT tt.ticketTypeID, tt.typeName FROM TicketTypes tt " +
+                "JOIN Tickets t ON tt.ticketTypeID = t.ticketTypeID " +
+                "WHERE t.eventID = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, eventId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int ticketTypeId = rs.getInt("ticketTypeID");
+                String typeName = rs.getString("typeName");
+
+                // Make a second query to get the description
+                String descSql = "SELECT description FROM TicketTypes WHERE ticketTypeID = ?";
+                try (PreparedStatement descPs = conn.prepareStatement(descSql)) {
+                    descPs.setInt(1, ticketTypeId);
+                    ResultSet descRs = descPs.executeQuery();
+                    if (descRs.next()) {
+                        String description = descRs.getString("description");
+                        TicketType ticketType = new TicketType(ticketTypeId, typeName, description);
+                        ticketTypeList.add(ticketType);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ticketTypeList;
+    }
+
 }

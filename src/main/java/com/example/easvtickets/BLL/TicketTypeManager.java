@@ -30,4 +30,13 @@ public class TicketTypeManager {
     public void updateTicketType(TicketType ticketType) throws Exception {
         ticketTypeDAO.updateTicketType(ticketType);
     }
+
+    public List<TicketType> getTicketTypesForEvent(int eventId) {
+        try {
+            return ticketTypeDAO.getTicketTypesForEvent(eventId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
