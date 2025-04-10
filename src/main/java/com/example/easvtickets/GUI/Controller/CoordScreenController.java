@@ -70,13 +70,6 @@ public class CoordScreenController {
         this.loginController = loginController;
     }
 
-    /**
-     * Implement:
-     * Table refreshes.
-     * Initialize to set up tables on boot
-     * Distinction between your assigned events and all events
-     */
-
 
     @FXML
     private void onAddTicketTypePressed() throws IOException {

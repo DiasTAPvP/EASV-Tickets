@@ -11,7 +11,7 @@ public class Coordinators {
         this.loginID = loginID;
     }
 
-    // Getters 123
+    // Getters
     public int getEventID() {
         return eventID;
     }

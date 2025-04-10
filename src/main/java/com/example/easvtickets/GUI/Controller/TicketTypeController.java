@@ -49,7 +49,7 @@ public class TicketTypeController {
         TicketType newTicketType = new TicketType(0, typeName, description);
         ticketTypeModel.createTicketType(newTicketType);
 
-        //Refresh the ticket table without reloading the entire screen
+        //Refresh the ticket table
         ticketName.clear();
         ticketDescription.clear();
 

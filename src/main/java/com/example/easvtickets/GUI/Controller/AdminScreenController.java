@@ -70,11 +70,6 @@ public class AdminScreenController {
         this.loginController = loginController;
     }
 
-    /**Implement:
-    * Table Refreshes
-    * Error displays
-    * Selection/Listener capabilities
-    **/
 
     public void refreshUserTable() {
         System.out.println("Table refreshed");
@@ -204,7 +199,6 @@ public class AdminScreenController {
 
     @FXML
     private void onAdminDeleteButtonPressed() throws Exception {
-        //Implement functionality
         int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the event or coordinator?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
         if (answer == JOptionPane.YES_OPTION) {

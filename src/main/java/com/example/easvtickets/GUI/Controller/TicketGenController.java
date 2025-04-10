@@ -40,16 +40,6 @@ public class TicketGenController {
     @FXML public Checkbox specialTickets;
     @FXML public ComboBox ticketTypePicker;
 
-    /**
-     * Implement:
-     * The ability to send a ticket to a user through their given email
-     * Making sure the checkboxes reflect the provided custom ticket types
-     * The ability to generate a ticket for a user
-     * The ability to add a special "Free" ticket type and send that as an extra
-     * if the event has a special ticket
-     */
-
-
     private TicketTypeModel ticketTypeModel;
     private TicketType selectedTicketType;
     private Events selectedEvent;
@@ -81,7 +71,7 @@ public class TicketGenController {
         // Generate the QR and PDF
         processQRCode(selectedEvent, email);
 
-        // Display the ticket (optional: you could store the ticket path)
+        // Display the ticket
         File ticketFile = new File("ticket_for_" + email + ".pdf");
         if (ticketFile.exists()) {
             displayPDF(ticketFile);
@@ -323,7 +313,6 @@ public class TicketGenController {
                     }
                 });
 
-                // Same for the button area
                 ticketTypePicker.setButtonCell(new ListCell<TicketType>() {
                     @Override
                     protected void updateItem(TicketType item, boolean empty) {

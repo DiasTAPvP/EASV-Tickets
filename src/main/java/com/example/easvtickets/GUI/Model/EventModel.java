@@ -38,7 +38,7 @@ public class EventModel {
     }
 
     public void deleteEvents(Events selectedEvent) throws Exception {
-        // Delete from the database through the layers (internally handles tickets)
+        // Delete from the database through the layers
         eventManager.deleteEvent(selectedEvent);
 
         // Remove from the ObservableList

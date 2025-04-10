@@ -45,7 +45,6 @@ public class TicketTypeModel {
     }
 
     public List<TicketType> getTicketTypesForEvent(int eventId) throws Exception {
-        // This would query your database for ticket types associated with the event
         return ticketTypeManager.getTicketTypesForEvent(eventId);
     }
 }

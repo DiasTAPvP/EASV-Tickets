@@ -48,53 +48,6 @@ public class EventWindowController {
     @FXML private Spinner<Integer> minuteSpinner;
     @FXML private ComboBox<String> ticketTypeBox;
 
-    /**
-     * Implement:
-     * Adding custom ticket types to the database and
-     * reflecting those in the Ticket Generator for a given event
-     * Functionality for adding a special ("free") ticket type to an event
-     **/
-
-
-
-
-    /*@FXML
-    public void initialize() {
-        // Set up hour spinner (0-23)
-        SpinnerValueFactory<Integer> hourFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 12);
-        hourSpinner.setValueFactory(hourFactory);
-
-        // Set up minute spinner (0-59)
-        SpinnerValueFactory<Integer> minuteFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
-        minuteSpinner.setValueFactory(minuteFactory);
-
-        // Format spinner to always show two digits
-        hourSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
-            @Override
-            public String toString(Integer value) {
-                return String.format("%02d", value);
-            }
-
-            @Override
-            public Integer fromString(String string) {
-                return Integer.parseInt(string);
-            }
-        });
-
-        minuteSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
-            @Override
-            public String toString(Integer value) {
-                return String.format("%02d", value);
-            }
-
-            @Override
-            public Integer fromString(String string) {
-                return Integer.parseInt(string);
-            }
-        });
-    }*/
 
     @FXML
     private void initialize() {
@@ -112,7 +65,7 @@ public class EventWindowController {
         formatSpinner(hourSpinner);
         formatSpinner(minuteSpinner);
 
-        // Safely initialize the ticket type selection UI
+        // Initialize the ticket type selection UI
         initTicketTypeSelection();
     }
 
@@ -166,26 +119,6 @@ public class EventWindowController {
         // Set on action handler to open the multi-select dialog
         ticketTypeBox.setOnAction(e -> showTicketTypeSelectionDialog());
 
-        /* Set on action handler to store the selected ticket type
-        ticketTypeBox.setOnAction(e -> {
-            String selectedTicketTypeName = ticketTypeBox.getValue();
-            if (selectedTicketTypeName != null && !selectedTicketTypeName.contains("No ticket")) {
-                try {
-                    // Find the selected ticket type by name
-                    TicketType selectedType = ticketTypeModel.getObservableList().stream()
-                            .filter(t -> t.getTypeName().equals(selectedTicketTypeName))
-                            .findFirst()
-                            .orElse(null);
-
-                    if (selectedType != null) {
-                        selectedTicketTypes.clear();
-                        selectedTicketTypes.add(selectedType);
-                    }
-                } catch (Exception ex) {
-                    System.err.println("Error selecting ticket type: " + ex.getMessage());
-                }
-            }
-        });*/
     }
 
     private void showTicketTypeSelectionDialog() {
@@ -316,21 +249,20 @@ public class EventWindowController {
                 selectedEvent.setAvailableTickets(availableTickets);
                 selectedEvent.setOptionalInformation(optionalInformation);
 
-                // First update the event
+
                 eventModel.updateEvent(selectedEvent);
 
-                // Then create tickets for each selected ticket type
+                // Create tickets for each selected ticket type
                 for (TicketType ticketType : selectedTicketTypes) {
-                    // Create a ticket with the ticket type's ID (all integers)
+
                     Tickets ticket = new Tickets(0, ticketType.getTicketTypeID(), selectedEvent.getEventId());
 
-                    // No need to call setTicketTypeID again since constructor already sets it
 
                     // Add the ticket to the database
                     eventModel.addTicketToEvent(ticket);
                 }
 
-                // Force manual refresh after update
+                // Force manual refresh
                 if (coordScreenController != null) {
                     System.out.println("Manual refresh after update");
                     coordScreenController.forceRefresh();
@@ -346,15 +278,11 @@ public class EventWindowController {
                 // Create the event first
                 eventModel.createEvent(newEvent);
 
-                // Get the new event ID after creation (assuming this is set by createEvent)
                 int newEventId = newEvent.getEventId();
 
-                // Now create tickets for each selected ticket type
                 for (TicketType ticketType : selectedTicketTypes) {
-                    // Create a ticket with the ticket type's ID (all integers)
                     Tickets newTicket = new Tickets(0, ticketType.getTicketTypeID(), newEventId);
 
-                    // No need to call setTicketTypeID again
 
                     // Add the ticket to the database
                     eventModel.addTicketToEvent(newTicket);

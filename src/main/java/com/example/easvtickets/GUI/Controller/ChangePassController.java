@@ -30,6 +30,6 @@ public class ChangePassController {
     private Users currentUser;
     public void setUser(Users user) {
         currentUser = user;
-        passSaveButton.setText(user.getUsername());
+        //passSaveButton.setText(user.getUsername());
     }
 }

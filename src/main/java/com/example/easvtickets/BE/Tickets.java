@@ -19,7 +19,7 @@ public class Tickets {
         this.eventID = eventID;
     }
 
-    // Getters 123
+    // Getters
     public int getTicketID() {
         return ticketID;
     }

@@ -30,13 +30,6 @@ public class CreateUserController {
     }
     
     public void setAdminScreenController(AdminScreenController adminScreenController) {this.adminScreenController = adminScreenController;}
-    
-    /**Implement:
-     * Error displays
-     * Initialize (setting up a generated password immediately?)
-     * Button functionality (save, cancel)
-     * The ability to send an email to the created user/coordinator with their login information on creation
-     */
 
 
     //Method to create a new user

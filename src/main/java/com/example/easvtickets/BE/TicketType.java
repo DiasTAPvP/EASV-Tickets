@@ -13,7 +13,7 @@ public class TicketType {
         this.description = description;
     }
 
-    // Getters 123
+    // Getters
     public int getTicketTypeID() {
         return ticketTypeID;
     }
