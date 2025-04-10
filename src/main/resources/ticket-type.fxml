@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Tooltip?>
 
-<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketTypeController">
+<AnchorPane prefHeight="168.0" prefWidth="500.0" styleClass="anchors" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easvtickets.GUI.Controller.TicketTypeController">
    <children>
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,13 +31,13 @@
          </opaqueInsets>
       </TextArea>
       <Text fx:id="ticketDescriptionText" layoutX="168.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket description" />
-      <Button fx:id="deleteTicketButton" layoutX="384.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="43.0" styleClass="button-login">
+      <Button fx:id="deleteTicketButton" layoutX="384.0" layoutY="135.0" mnemonicParsing="false" onAction="#onDeleteTicket" prefHeight="27.0" prefWidth="43.0" styleClass="button-login">
          <tooltip>
             <Tooltip text="Delete Ticket" />
          </tooltip>
       </Button>
 
-      <Button fx:id="addTicketButton" layoutX="197.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="button-login">
+      <Button fx:id="addTicketButton" layoutX="197.0" layoutY="135.0" mnemonicParsing="false" onAction="#onCreateTicket" prefHeight="27.0" prefWidth="36.0" styleClass="button-login">
          <tooltip>
             <Tooltip text="Add Ticket" />
          </tooltip>

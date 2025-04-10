@@ -100,21 +100,6 @@ public class AdminScreenController {
 
 
     @FXML
-    private void onManageEntityButtonPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin- .fxml"));
-        Parent root = loader.load();
-
-        AdminPanelController adminPanelController = loader.getController();
-        adminPanelController.setAdminScreenController(this);
-
-        Stage stage = new Stage();
-        stage.setTitle("Manage Entities");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-    }
-
-    @FXML
     private void onCreateUserButtonPressed() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/create-user.fxml"));
         Parent root = loader.load();

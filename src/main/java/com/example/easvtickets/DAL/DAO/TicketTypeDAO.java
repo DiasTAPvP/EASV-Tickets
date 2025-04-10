@@ -50,7 +50,7 @@ public class TicketTypeDAO implements ITicketDataAccess {
     @Override
     public TicketType createTicketType(TicketType newTicketType) throws Exception {
         try (Connection conn = dbConnector.getConnection()) {
-            String sql = "INSERT INTO TicketType (typeName, description) VALUES (?, ?)";
+            String sql = "INSERT INTO TicketTypes (typeName, description) VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, newTicketType.getTypeName());
             ps.setString(2, newTicketType.getDescription());
@@ -69,7 +69,7 @@ public class TicketTypeDAO implements ITicketDataAccess {
 
     @Override
     public void deleteTicketType(TicketType ticketType) throws Exception {
-        String sql = "DELETE FROM TicketType WHERE ticketTypeID = ?";
+        String sql = "DELETE FROM TicketTypes WHERE ticketTypeID = ?";
 
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -83,7 +83,7 @@ public class TicketTypeDAO implements ITicketDataAccess {
 
     @Override
     public void updateTicketType(TicketType ticketType) throws Exception {
-        String sql = "UPDATE TicketType SET typeName = ?, description = ? WHERE ticketTypeID = ?";
+        String sql = "UPDATE TicketTypes SET typeName = ?, description = ? WHERE ticketTypeID = ?";
         DBConnector dbConnector = new DBConnector();
 
         try (Connection conn = dbConnector.getConnection();
