@@ -61,14 +61,28 @@ public class TicketTypeController {
 
     public void onDeleteTicket() throws Exception {
         if (selectedTicketType != null) {
-            ticketTypeModel.deleteTicketType(selectedTicketType);
-            // Refresh ticket table
-            loadTickets();
-            // Clear fields
-            ticketName.clear();
-            ticketDescription.clear();
-            selectedTicketType = null;
-        } else {
+            try {
+                ticketTypeModel.deleteTicketType(selectedTicketType);
+                // Refresh ticket table
+                loadTickets();
+                // Clear fields
+                ticketName.clear();
+                ticketDescription.clear();
+                selectedTicketType = null;
+            } catch (Exception e) {
+                String msg = e.getMessage();
+                if (e.getMessage().contains("Cannot be deleted")) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "Unexpected error has occured.");
+                    alert.showAndWait();
+                } else {
+                    e.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "Ticket type cannot be deleted because it's currently being used by a customer for an event.");
+                    alert.showAndWait();
+                }
+            }
+        }   else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "No ticket type selected.");
             alert.showAndWait();
         }
