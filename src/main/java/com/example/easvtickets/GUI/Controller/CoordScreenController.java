@@ -74,13 +74,28 @@ public class CoordScreenController {
 
 
     @FXML
+    private void onAddTicketTypePressed() throws IOException {
+        FXMLLoader loader =  new FXMLLoader(getClass().getResource("/ticket-type.fxml"));
+        Parent root =  loader.load();
+
+        TicketTypeController typecontroller = loader.getController();
+        typecontroller.setCoordScreenController(this);
+
+        Stage stage = new Stage();
+        stage.setTitle("Add Ticket Types");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    @FXML
     private void onTicketsPressed() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ticket-generator.fxml"));
         Parent root = loader.load();
 
         //Get the controller and set the controller
-        TicketController ticketcontroller = loader.getController();
+        TicketGenController ticketcontroller = loader.getController();
         ticketcontroller.setCoordScreenController(this);
 
         ticketcontroller.setEventDetails(selectedEvent);
